@@ -1,0 +1,151 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Message Queue &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="next" title="Basic Concepts" href="overview.html" />
+    <link rel="prev" title="API Endpoints" href="../users/endpoints.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Message Queue</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="../users/endpoints.html">API Endpoints</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="overview.html">Basic Concepts</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="message-queue">
+<h1>Message Queue<a class="headerlink" href="#message-queue" title="Permalink to this headline">¶</a></h1>
+<p>The message queue service is designed to provide the ability to distribute
+messages to applications in a way that&#8217;s both very easy to use as well as
+highly scalable and with enough options to enable a variety of use cases. The
+service is intended to have the flexibility to power server to client
+notifications, social inboxes, content feeds, commenting services, as well as
+traditional distributed message queue operations.</p>
+<p>The message queue service is usable both directly and is also used
+under-the-hood by the system of activity streams, event logging, and data
+analytics. This section will primarily discuss using it directly, but even if
+you don&#8217;t plan to use it that way, if you plan to use things like activity
+streams in your app, knowing how the system manages message queues will help.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Basic Concepts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#messages">Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#queues">Queues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#first-in-first-out-fifo">First-In-First-Out (FIFO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#use-random-access-to-build-feeds">Use Random Access To Build Feeds</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#queues-can-have-any-json-data-as-metadata">Queues can have any JSON data as metadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#searching-queues">Searching Queues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#queue-limits">Queue Limits</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#consumers-state">Consumers &amp; State</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#queues-with-multiple-consumers">Queues With Multiple Consumers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="overview.html#consumers-and-metadata">Consumers and Metadata</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="basic_operations.html">Basic Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="basic_operations.html#creating-a-message">Creating a message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_operations.html#retrieving-a-message">Retrieving a message</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_operations.html#getting-the-most-recent-10-messages">Getting the most recent 10 messages</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="subscriptions.html">Delivering Messages To One Or More Consumers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="subscriptions.html#multiple-consumers-reading-from-a-single-queue">Multiple Consumers Reading from a Single Queue</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subscriptions.html#queues-subscribing-to-other-queues">Queues Subscribing To Other Queues</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="subscriptions.html#gateway-queues">Gateway Queues</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Content Filters &amp; Delivery Rules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="gateways.html">Service Gateways &amp; Push Notifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints.html">API Endpoints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#post-messages">Post Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#get-messages">Get Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#add-subscriber">Add Subscriber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#add-one-or-more-subscribers">Add One Or More Subscribers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#delete-subscriber">Delete Subscriber</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#delete-one-or-more-subscribers">Delete One Or More Subscribers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#get-subscribers">Get Subscribers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#get-queue-properties">Get Queue Properties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#update-queue-properties">Update Queue Properties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="realtime.html">Realtime Delivery With Websocket</a></li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="../users/endpoints.html">API Endpoints</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="overview.html">Basic Concepts</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

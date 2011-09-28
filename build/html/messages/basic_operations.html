@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic Operations &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="up" title="Message Queue" href="index.html" />
+    <link rel="next" title="Delivering Messages To One Or More Consumers" href="subscriptions.html" />
+    <link rel="prev" title="Basic Concepts" href="overview.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Basic Operations</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="overview.html">Basic Concepts</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="subscriptions.html">Delivering Messages To One Or More Consumers</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="basic-operations">
+<h1>Basic Operations<a class="headerlink" href="#basic-operations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="creating-a-message">
+<h2>Creating a message<a class="headerlink" href="#creating-a-message" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-post-http-apiusergridcom-my-app-queues-foo-bar">
+<tt class="descclassname deschttpmethod">POST </tt><tt class="descname deschttpurl"><span class="deschttppath">/my-app/queues/foo/bar</span></tt><a class="headerlink" href="#method-post-http-apiusergridcom-my-app-queues-foo-bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><em>Request Body</em></p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;test&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Response Body</em></p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;status&quot;</span> <span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;/foo/bar/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;1c184f38-9134-3400-b802-81315d9e7388&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;messages&quot;</span> <span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1314034739489</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span> <span class="o">:</span> <span class="s2">&quot;9e33d9e5-cce5-11e0-9af9-9227e40e3559&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;last&quot;</span> <span class="o">:</span> <span class="s2">&quot;9e33d9e5-cce5-11e0-9af9-9227e40e3559&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="retrieving-a-message">
+<h2>Retrieving a message<a class="headerlink" href="#retrieving-a-message" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-get-http-apiusergridcom-my-app-queues-foo-bar">
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/my-app/queues/foo/bar</span></tt><a class="headerlink" href="#method-get-http-apiusergridcom-my-app-queues-foo-bar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><em>Response Body</em></p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;status&quot;</span> <span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;/foo/bar/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;1c184f38-9134-3400-b802-81315d9e7388&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;messages&quot;</span> <span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1314034739489</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span> <span class="o">:</span> <span class="s2">&quot;9e33d9e5-cce5-11e0-9af9-9227e40e3559&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;last&quot;</span> <span class="o">:</span> <span class="s2">&quot;9e33d9e5-cce5-11e0-9af9-9227e40e3559&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="getting-the-most-recent-10-messages">
+<h2>Getting the most recent 10 messages<a class="headerlink" href="#getting-the-most-recent-10-messages" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-get-http-apiusergridcom-my-app-queues-foo-bar-position-end-limit-10">
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/my-app/queues/foo/bar</span><span class="deschttpquery">?<em class="deschttpqueryparam">position=end</em>&amp;<em class="deschttpqueryparam">limit=10</em></span></tt><a class="headerlink" href="#method-get-http-apiusergridcom-my-app-queues-foo-bar-position-end-limit-10" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p><em>Response Body</em></p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;status&quot;</span> <span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;/foo/bar/&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;1c184f38-9134-3400-b802-81315d9e7388&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;messages&quot;</span> <span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1314034739489</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span> <span class="o">:</span> <span class="s2">&quot;9e33d9e5-cce5-11e0-9af9-9227e40e3559&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1314034739489</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span> <span class="o">:</span> <span class="s2">&quot;9e33d9e5-cce5-11e0-9af9-9227e40e3559&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1314034739489</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span> <span class="o">:</span> <span class="s2">&quot;9e33d9e5-cce5-11e0-9af9-9227e40e3559&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;last&quot;</span> <span class="o">:</span> <span class="s2">&quot;9e33d9e5-cce5-11e0-9af9-9227e40e3559&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="overview.html">Basic Concepts</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="subscriptions.html">Delivering Messages To One Or More Consumers</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

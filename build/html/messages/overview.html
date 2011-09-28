@@ -1,0 +1,202 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic Concepts &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="up" title="Message Queue" href="index.html" />
+    <link rel="next" title="Basic Operations" href="basic_operations.html" />
+    <link rel="prev" title="Message Queue" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Basic Concepts</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Message Queue</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="basic_operations.html">Basic Operations</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="basic-concepts">
+<h1>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="messages">
+<h2>Messages<a class="headerlink" href="#messages" title="Permalink to this headline">¶</a></h2>
+<p>A Message is a simple JSON object. All it has to contain is a UUID that we
+assign it and a timestamp that either we or your application can provide.
+However, it can contain any additional JSON data that you want to store in it,
+including values, arrays, other objects.  This makes it a simple proposition
+to use Message for storing everything from Tweets coming in from a raw
+Twitter stream to application state or communications between between servers.
+<em>All Messages are permanently stored and are immutable.</em></p>
+</div>
+<div class="section" id="queues">
+<h2>Queues<a class="headerlink" href="#queues" title="Permalink to this headline">¶</a></h2>
+<p>A Queue is a timestamp-ordered set of messages. Typical, most operations on a
+queue will be performed by a producer application that posts messages to the
+queue and a consumer application which connects to the queue and retrieves
+new messages as they become available.</p>
+<div class="section" id="first-in-first-out-fifo">
+<h3>First-In-First-Out (FIFO)<a class="headerlink" href="#first-in-first-out-fifo" title="Permalink to this headline">¶</a></h3>
+<p>Queues maintain state regarding the most recent messages delivered to the
+queue and the most recent read from the queue. A typical example of this in
+use is to have a queue of work tasks, and then have each worker go to the
+queue to get the next available work task, perform the task, and then return
+to the queue to get another task to process. Messages would be handed out
+sequentially to each worker and no two workers would receive the same task.</p>
+</div>
+<div class="section" id="use-random-access-to-build-feeds">
+<h3>Use Random Access To Build Feeds<a class="headerlink" href="#use-random-access-to-build-feeds" title="Permalink to this headline">¶</a></h3>
+<p>It&#8217;s important to understand that, unlike other messages queue systems you
+might have used, that our queues don&#8217;t have to be &#8220;black boxes&#8221;. While our
+queues can be accessed in the classic sequential FIFO model of traditional
+message queues, they can also be accessed in a true random-access method. If
+you do this, then the automatic management of consumer&#8217;s positions in the
+queue will not apply to the operations you make, but this lets you directly
+use the queue to power things like feeds of sequential content. For example,
+it&#8217;s very trivial to construct a simple latest headlines widget that always
+shows the last 10 headlines from the queue. Such a widget might be written in
+Javascript, have no local state whatsoever, and consist of nothing more that
+an API request to a message queue endpoint on our service requesting the 10
+latest message. Such a widget would be able to function at virtually any level
+of scale. When the widget made the request to the service, it would specify
+that it wanted to service to ignore the queue position and to retrieve a set
+of messages from the end of the queue. The specifics of how this is done are
+documented in later sections.</p>
+</div>
+<div class="section" id="queues-can-have-any-json-data-as-metadata">
+<h3>Queues can have any JSON data as metadata<a class="headerlink" href="#queues-can-have-any-json-data-as-metadata" title="Permalink to this headline">¶</a></h3>
+<p>Finally, Queues are also full JSON objects and can have any arbitrary
+properties associated with them. These properties can be used as criteria in
+message delivery. For example, a message can be delivered to a subscriber
+queue where &#8220;location contains &#8216;new york&#8217;&#8221;. This is particularly useful when
+configuring queues to subscribe to other queues and being able to define rules
+for message forwarding. These topics will get discussed in the section on
+Subscriptions And Broadcasting later.</p>
+</div>
+<div class="section" id="searching-queues">
+<h3>Searching Queues<a class="headerlink" href="#searching-queues" title="Permalink to this headline">¶</a></h3>
+<p>If a Message is indexed, then all application-defined properties are indexed
+and searchable. Queue search results are always time-ordered and are retrieved
+according to the position and number of results that you specify. For example,
+if you specify that you want messages where a property contains a certain
+keyword and you retrieve the next three messages that contain that keyword,
+then the position in the queue will be advanced past the next three messages
+that meet that constraint. This means that the position will be advanced past
+as many messages that don&#8217;t mean that constraint until three messages are
+found or the end of the queue is reached.</p>
+</div>
+<div class="section" id="queue-limits">
+<h3>Queue Limits<a class="headerlink" href="#queue-limits" title="Permalink to this headline">¶</a></h3>
+<p>Queues are defined to hold a &#8220;nigh infinite&#8221; amount of messages. However,
+there are certain limits that you should be aware of. If you&#8217;re going to be
+storing over a thousand messages per second on a sustained basis over a twenty
+four hour period (for example, from a Twitter firehose feed), you should
+contact us to make special arrangements. Also note that maintaining indexes
+will further reduce this depending on how much text content you&#8217;re storing.</p>
+</div>
+</div>
+<div class="section" id="consumers-state">
+<h2>Consumers &amp; State<a class="headerlink" href="#consumers-state" title="Permalink to this headline">¶</a></h2>
+<p>Consumers refer to application clients that operate on message queues in order
+to retrieve or take delivery of messages. When you access the message queue
+service as a consumer, you can do so anonymously or by providing a consumer
+ID. An anonymous operation uses the state of the queue to determine the next
+message you should see and what messages you&#8217;ve already been delivered. If you
+tag a message, that tag is stored with the queue. For many applications, it
+makes sense to assign a queue to every user, for example as a user&#8217;s inbox. In
+this case, there&#8217;s no real need for managing the consumer&#8217;s state separate
+from the queue.</p>
+<div class="section" id="queues-with-multiple-consumers">
+<h3>Queues With Multiple Consumers<a class="headerlink" href="#queues-with-multiple-consumers" title="Permalink to this headline">¶</a></h3>
+<p>However, if you want to enable multiple consumers to independently access one
+ore more queues and have the consumers able to independently retrieve
+messages, where every consumer can be at a different position in the queue,
+and they can reach retrieve their own copy of the message, or have every
+consumer able to tag messages independently, then you need to makes sure your
+consumer identifies itself by passing the same consumer ID with every API
+request.</p>
+</div>
+<div class="section" id="consumers-and-metadata">
+<h3>Consumers and Metadata<a class="headerlink" href="#consumers-and-metadata" title="Permalink to this headline">¶</a></h3>
+<p>Although Messages are immutable, metadata can be attached to messages. A
+simple example of this would be &#8220;favoriting&#8221; a message. If you&#8217;re logged into
+as an identified consumer, then every time you favorite a message in a
+queue, the metadata to represent this is attached to the consumer, If you&#8217;re
+logged in anonymously then that metadata would be visible and modifiable to
+anyone in the queue. Again, the desired behavior will be very
+application-specific. If you&#8217;re giving every user their own queue as an inbox,
+then there&#8217;s no need for any additional state management for consumers. If
+there&#8217;s a group queue that multiple consumers can interact with. then you&#8217;ll
+want the service to maintain separate state for every consumer.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Message Queue</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="basic_operations.html">Basic Operations</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

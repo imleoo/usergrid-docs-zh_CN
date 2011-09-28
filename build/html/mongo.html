@@ -1,0 +1,117 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Mongo API &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="index.html" />
+    <link rel="prev" title="Websocket Realtime API" href="websocket.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Mongo API</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="websocket.html">Websocket Realtime API</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="mongo-api">
+<h1>Mongo API<a class="headerlink" href="#mongo-api" title="Permalink to this headline">¶</a></h1>
+<p>Usergrid provides a partial implementation of Mongo the Mongo API so that Mongo clients can connect to Usergrid.</p>
+<p>There are a number of drivers and tools for talking to MongoDB, which has a data model that
+is very similar to that of Usergrid.  In order to make it easier for people to get started
+quickly with Usergrid, we provide an implementation of the Mongo native wire protocol and
+to map the key query and CRUD operations to Usergrid equivalents.</p>
+<div class="section" id="mapping-usergrid-multi-tenancy-to-mongo-security">
+<h2>Mapping Usergrid Multi-tenancy to Mongo Security<a class="headerlink" href="#mapping-usergrid-multi-tenancy-to-mongo-security" title="Permalink to this headline">¶</a></h2>
+<p>First steps are to simply be able to handle a client login and map it to a
+Usergrid account.</p>
+<p>Authentication by a Mongo client is described at <a class="reference external" href="http://www.mongodb.org/display/DOCS/Security+and+Authentication">Mongo Security and Authentication</a> and <a class="reference external" href="http://www.mongodb.org/display/DOCS/Implementing+Authentication+in+a+Driver">Mongo Implementing Authentication in a Driver</a>.</p>
+<p>A user who authenticates against the Mongo &#8216;admin&#8217; account will be actually
+logging in as a Usergrid admin user who is a member of one or more Usergrid
+accounts, each of which contains a set of applications that user is able to
+administer. While they list the databases via the Mongo API, what they will be
+seeing is the aggregate list of the applications for all the accounts they are
+members of.</p>
+<p>For any database (Usergrid application), they&#8217;ll be able to list the collections.</p>
+<p>Note: Internally, Mongo refers to it&#8217;s collections as &#8220;namespaces&#8221;, which is a
+potential point of confusion between Usergrid which uses the term &#8220;collection&#8221;
+as it&#8217;s equivalent to a &#8220;database&#8221;.</p>
+</div>
+<div class="section" id="implementation-notes">
+<h2>Implementation Notes<a class="headerlink" href="#implementation-notes" title="Permalink to this headline">¶</a></h2>
+<p>See the <a class="reference external" href="http://www.mongodb.org/display/DOCS/Mongo+Wire+Protocol">Mongo Wire Protocol</a> for information on how native Mongo clients talk to the server.</p>
+<p>Mongo uses BSON, which is a binary JSON format, as part of the wire protocol.
+For compatibility, we&#8217;re using the BSON encoder from the <a class="reference external" href="https://github.com/mongodb/mongo-java-driver/">Mongo Java Driver</a>.
+Future versions of Usergrid will switch to using <a class="reference external" href="https://github.com/michel-kraemer/bson4jackson">Bson4Jackson</a>.</p>
+<p>See <a class="reference external" href="http://www.mongodb.org/display/DOCS/List+of+Database+Commands">Mongo Database Commands</a> for a list of commands that Mongo supports.</p>
+<p>See <a class="reference external" href="http://www.mongodb.org/display/DOCS/Mongo+Metadata">Mongo System Metadata</a> for a list of metadata information a Mongo server
+provides.</p>
+<p>See <a class="reference external" href="http://www.mongodb.org/display/DOCS/Mongo+Query+Language">Mongo Query Language</a> for the syntax for querying the Mongo database.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="websocket.html">Websocket Realtime API</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

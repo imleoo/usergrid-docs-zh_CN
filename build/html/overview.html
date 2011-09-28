@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Overview and Key Concepts &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="index.html" />
+    <link rel="next" title="Getting Started With The Administration Console" href="console.html" />
+    <link rel="prev" title="Introduction" href="intro.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Overview and Key Concepts</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="intro.html">Introduction</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="console.html">Getting Started With The Administration Console</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="overview-and-key-concepts">
+<h1>Overview and Key Concepts<a class="headerlink" href="#overview-and-key-concepts" title="Permalink to this headline">¶</a></h1>
+<p>This section provides an overview of the key concepts for using Usergrid.</p>
+<div class="section" id="admin-and-organization-accounts">
+<h2>Admin and Organization Accounts<a class="headerlink" href="#admin-and-organization-accounts" title="Permalink to this headline">¶</a></h2>
+<p>When you signup up on the Usergrid.com site, you create an organization
+account for your company or team and an individual account for yourself that
+has admin rights to that organization. Your individual account can be a member
+of multiple organizations.</p>
+</div>
+<div class="section" id="administration-console">
+<h2>Administration Console<a class="headerlink" href="#administration-console" title="Permalink to this headline">¶</a></h2>
+<p>Once you create a account through the quick signup process, you&#8217;ll be
+presented with the Console. The Console is designed for team usage with a
+lightweight delegated administration capability. Different classes of
+administrative users will have access to different capabilities. For example,
+one common scenario is that you’ll be creating applications for a client who
+you will give sign-in access to. That client will only have the ability to see
+and potentially modify configuration settings for their application.</p>
+<p>One important aspect of the Console that may not be immediately apparent tois
+that the entire Console is actually an HTML5/Javascript application that talks
+to the service via our public APIs. The Console is also the most complete
+reference application for using Usergrid from Javascript and is fully open
+source and forkable on GitHub at <a class="reference external" href="https://github.com/usergrid/console">https://github.com/usergrid/console</a>. This
+lets you easily extend it or embed it into your own applications and to
+inspect the code to see the recommend ways for interacting with our API. The
+Usergrid Javascript client is part of the Console project.</p>
+</div>
+<div class="section" id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>Typically, for every app that you build, you&#8217;d create a new Application within
+Usergrid, so that your app would have it&#8217;s own private space to store it&#8217;s
+objects and data. In some cases, if you had several apps that shared most of
+the same data and users, you might represent them in Usergrid as a single
+Application and the apps would share the data space.</p>
+<div class="section" id="applications-in-the-console">
+<h3>Applications In the Console<a class="headerlink" href="#applications-in-the-console" title="Permalink to this headline">¶</a></h3>
+<p>The Application dashboard shows all of the information for an application. You
+can see activity level, total number of objects, objects created in the last
+day, week, and month, and other vital statistics for monitoring the health of
+your app as well as where you are within your quota limits.</p>
+</div>
+</div>
+<div class="section" id="entities-and-collections">
+<h2>Entities And Collections<a class="headerlink" href="#entities-and-collections" title="Permalink to this headline">¶</a></h2>
+<p>In the Console, you&#8217;ll see the word “entities” in several places. This is the
+term that Usergrid uses for how it stores the objects it manages. Usergrid
+defines specific entity types and associated logic for these entities.
+However, you can also create your own, and, unlike records in conventional
+database tables, which have a very rigid schema which defines what can and
+can&#8217;t be stored in them and how they can be related to each other, Usergrid
+entities are very flexible in what they can store and how they can be
+connected. In this way, Usergrid is much better at managing data for modern
+applications with “social” features, where people, places, and content are
+connected together in whatever way is most appropriate from a user
+perspective.</p>
+<p>Each entity has at minimum a unique UUID, and a type, which is a string such
+as “user”, “group”, or “location”. Your application also has a similar UUID, and
+when you access the system via the API, you&#8217;ll always provide the application
+UUID and typically the entity UUID of the entity you&#8217;re modifying or
+retrieving. Entities may also have one or more unique properties, like a name
+property, that can be used as alternate ways to retrieve an entity.</p>
+<p>Here&#8217;s a very simple example of an entity:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;uuid&quot;</span> <span class="o">:</span> <span class="s2">&quot;1c18ca40-90b2-11e0-b91b-12313f0204bb&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;created&quot;</span> <span class="o">:</span> <span class="mi">1307415547108000</span><span class="p">,</span>
+  <span class="s2">&quot;modified&quot;</span> <span class="o">:</span> <span class="mi">1307415547108000</span><span class="p">,</span>
+  <span class="s2">&quot;username&quot;</span> <span class="o">:</span> <span class="s2">&quot;edanuff&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;email&quot;</span> <span class="o">:</span> <span class="s2">&quot;ed@anuff.com&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;Ed Anuff&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In terms of what can be stored in properties, we’ve specifically focused on
+data that can be stored as JSON (JavaScript Object Notation), which is
+supported by almost all languages and can represent most types of data and
+content.</p>
+<div class="section" id="pre-defined-entity-types">
+<h3>Pre-Defined Entity Types<a class="headerlink" href="#pre-defined-entity-types" title="Permalink to this headline">¶</a></h3>
+<p>For system-provided entities, Usergrid defines a schema, which specifies which
+core properties are defined, what types of values they can contain, whether
+they&#8217;re required, as well as indexed or unique. It also defines whether the
+entity has collections of other entities. This makes it possible for the
+service to make smart decisions about how to manage the data. However,
+Usergrid also allows you to assign your own custom dynamic properties, to the
+pre-defined entities. These properties can be anything you want, their
+contents are always indexed, and in all other ways can be used like the
+regular core properties. Further, although not a requirement, we do enable the
+uploading of custom schemas into the system.</p>
+</div>
+<div class="section" id="collections">
+<h3>Collections<a class="headerlink" href="#collections" title="Permalink to this headline">¶</a></h3>
+<img alt="_images/application_entities4.png" src="_images/application_entities4.png" />
+<p>Entities are stored in collections. For every entity type, there&#8217;s a root
+collection that contains all entities of that type. Root collections are
+automatically named for the plural form of the entity type. For example, an
+entity of type &#8220;user&#8221; are stored in the &#8220;users&#8221; root collection.</p>
+<p>Some entities contain collections of other entities. For example, a group will
+contain a collection of the users in that group. Entities can be in more than
+one collection but are always members of the root collection for their entity
+type.</p>
+<p>Collections can be searched and iterated through. Most predefined entity
+properties are indexed and all application-defined properties are indexed,
+allowing you to easily query collections.</p>
+</div>
+<div class="section" id="connecting-entities-together">
+<h3>Connecting Entities Together<a class="headerlink" href="#connecting-entities-together" title="Permalink to this headline">¶</a></h3>
+<p>One of the most powerful things about entities is that they can be connected
+together in a completely dynamic fashion. This eliminates much of the typical
+challenges of pre-defining relationships in a conventional database. Any two
+entities can be connected together with a specific connection type. For
+example, to emulate how Twitter does following of users, you&#8217;d connect two
+User entities together with a connection type of “follows”. The system
+organizes the data for fast queries against connections, so that, for example,
+to find all the other users that a user was following, under the hood the
+system would be doing a single “database read”. Of course, Usergrid manages
+this for you and in most cases you don&#8217;t need to worry about how expensive
+these types of operations are, because the system organizes the data for fast
+retrieval.</p>
+</div>
+</div>
+<div class="section" id="messages-events-and-activities">
+<h2>Messages, Events, and Activities<a class="headerlink" href="#messages-events-and-activities" title="Permalink to this headline">¶</a></h2>
+<p>Most modern apps struggle to manage streams of data, whether they be content
+such as comments, activities, and tweets, or things like event logs for
+analytics. Mobile applications in particular are prone to generating very
+large amounts of this sort of data. In addition, this data often needs to be
+automatically routed to subscribers or filtered or counted.</p>
+<p>Usergrid separates this type of data from the regular entities that it
+manages. This is because the volume of this data is significantly higher than
+that of all the rest of the data that an application manages. For example, at
+the time of this writing, it&#8217;s been reported in the press that Twitter has
+roughly as many Tweets on a daily basis as it has users since that service
+started. In Usergrid, we store activities and events into a highly scalable
+message queue system that is designed to keep up with very high rates of data.</p>
+<p>The message queue can be used directly, and supports many of the standard
+types of operations found in enterprise message queue systems or services like
+Amazon&#8217;s SQS. However, we also create two higher-level mechanisms for using
+messages. The are Activities and Events.</p>
+<p>Activities use the message queue capabilities under the hood to implement
+activity streams for your application. These are based on the Activity Streams
+specification at <a class="reference external" href="http://activitystrea.ms/">http://activitystrea.ms/</a>. Activity distribution to followers
+and group members is automatically handled, so you don&#8217;t need to manually
+construct these as publish and subscribe relationships in the message queue.</p>
+<p>Events are used for logging purposes in your application, and provide a simple
+way to sent data that you want to keep track of for business intelligence or
+analytics purposes.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="intro.html">Introduction</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="console.html">Getting Started With The Administration Console</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>
