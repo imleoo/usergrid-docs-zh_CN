@@ -1,0 +1,384 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic API Operations &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="up" title="Entities &amp; Collections" href="index.html" />
+    <link rel="next" title="Queries" href="queries.html" />
+    <link rel="prev" title="Data Model" href="data_model.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Basic API Operations</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="data_model.html">Data Model</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="queries.html">Queries</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="basic-api-operations">
+<h1>Basic API Operations<a class="headerlink" href="#basic-api-operations" title="Permalink to this headline">¶</a></h1>
+<p>Usergrid uses a pure REST API. See <a class="reference external" href="http://en.wikipedia.org/wiki/Representational_State_Transfer">Representational State Transfer</a> at Wikipedia
+for more information about the principles behind this type of API.</p>
+<p>REST API&#8217;s are built by thinking about resources, and the location of those
+resources is described through paths that are intrinsically about collections
+and elements in those collections. The challenge to build a REST API is to
+figure out how to represent the data and the action in the form of a path to a
+resource that can be created, retrieved, updated, or deleted.</p>
+<p>Usergrid&#8217;s data model is designed to be very easily accessed via a REST API.
+For example, to access the user with the username &#8220;edanuff&#8221; in the application
+&#8220;myapp&#8221;, one would construct the following API request:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/myapp/users/edanuff</span>
+</pre></div>
+</div>
+<p>To get a listing of everything he liked, use the following URL:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/myapp/users/edanuff/likes</span>
+</pre></div>
+</div>
+<p>To limit it to entities of type &#8220;restaurant&#8221;, use the following URL:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/myapp/users/edanuff/likes/restaurant</span>
+</pre></div>
+</div>
+<div class="section" id="constructing-api-requests">
+<h2>Constructing API Requests<a class="headerlink" href="#constructing-api-requests" title="Permalink to this headline">¶</a></h2>
+<p>All API requests to the Usergrid live site are made to
+<a class="reference external" href="http://api.usergrid.com">http://api.usergrid.com</a>. Please note that this will eventually be replaced
+with <a class="reference external" href="https://api.usergrid.com">https://api.usergrid.com</a>.</p>
+<p>Usergrid takes a fairly standard approach and interprets a URL resource path
+as a list of names, UUIDs, or queries.</p>
+<p>The basic path that follows the hostname is in the format of:</p>
+<div class="highlight-javascript"><pre>/&lt;application-uuid|application-name&gt;/&lt;collection-name&gt;[/&lt;entity-id|entity-name&gt;]</pre>
+</div>
+<p>From here on in, we&#8217;ll describe the API starting from after the application
+uuid or application name. For example, instead of this:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/myapp/users</span>
+</pre></div>
+</div>
+<p>We&#8217;ll just describe it as:</p>
+<div class="highlight-javascript"><pre>/users</pre>
+</div>
+<p>Remember that your actual HTTP REST requests need to have the full URL path.</p>
+<div class="section" id="accessing-collections">
+<h3>Accessing Collections<a class="headerlink" href="#accessing-collections" title="Permalink to this headline">¶</a></h3>
+<p>To request all the entities in a collection, just use the path of the
+collection:</p>
+<div class="highlight-javascript"><pre>/users</pre>
+</div>
+<p>When you do this, you&#8217;ll get the first 10 entities in a collection, sorted by
+their entity uuid. Usually you&#8217;ll either want to get more results, page
+through results, or get a specific item in the collection. We&#8217;ll describe how
+thats done in the next section.</p>
+<p>To create an item in the collection, you&#8217;d do a POST to the collection with
+the data you wanted to new entity to contain in JSON format. This is described
+more fully later in a later section.</p>
+</div>
+<div class="section" id="queryies-and-parameters">
+<h3>Queryies and Parameters<a class="headerlink" href="#queryies-and-parameters" title="Permalink to this headline">¶</a></h3>
+<p>There will usually be more entities in the collection than you can return with
+one request, in which case, you&#8217;ll want to issue a query:</p>
+<div class="highlight-javascript"><pre>/users?filter=facebook.first_name%3D'john'</pre>
+</div>
+<p>The above querystring value for the filter parameter is the url-encoded
+version of:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">facebook</span><span class="p">.</span><span class="nx">first_name</span><span class="o">=</span><span class="s1">&#39;john&#39;</span>
+</pre></div>
+</div>
+<p>You could construct multiple filters and the results would be AND&#8217;d together.
+For example:</p>
+<div class="highlight-javascript"><pre>/users?filter=facebook.first_name%3D'john'&amp;filter=facebook.last_name%3D'doe'</pre>
+</div>
+<p>Alternately, we also support an SQL-like query language, so you could do:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">select</span> <span class="o">*</span> <span class="nx">where</span> <span class="nx">facebook</span><span class="p">.</span><span class="nx">first_name</span><span class="o">=</span><span class="s1">&#39;john&#39;</span> <span class="nx">and</span> <span class="nx">facebook</span><span class="p">.</span><span class="nx">last_name</span><span class="o">=</span><span class="s1">&#39;doe&#39;</span>
+</pre></div>
+</div>
+<p>The url-encoded version of that would be:</p>
+<div class="highlight-javascript"><pre>/users?ql=select * where facebook.first_name%3D'john' and facebook.last_name%3D'doe'</pre>
+</div>
+</div>
+<div class="section" id="alternative-to-url-encoding">
+<h3>Alternative to URL-encoding<a class="headerlink" href="#alternative-to-url-encoding" title="Permalink to this headline">¶</a></h3>
+<p>As a convenience, we provide an alternative to conventional url-encoding of
+parameters in queries.</p>
+<p>For example, rather than this:</p>
+<div class="highlight-javascript"><pre>/users?filter=facebook.first_name%3D'john'&amp;filter=facebook.last_name%3D'doe'</pre>
+</div>
+<p>we let you Json-encode queries into the URL:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="sr">/users/</span><span class="p">{</span><span class="s2">&quot;filter&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;facebook.first_name = &#39;john&#39;&quot;</span><span class="p">,</span> <span class="s2">&quot;facebook.last_name = &#39;doe&#39;&quot;</span><span class="p">]}</span>
+</pre></div>
+</div>
+<p>This is a non-standard convention that is optional and primarily provided to
+make it easier for hand constructing test queries and we also use in in the
+documentation to make some examples more clear to understand since the
+url-encoded query values can be hard to follow. The Usergrid API can
+understand queries in this format but we recommend using conventionally
+formatted url-encoded queries within client libraries. The Javascript client
+allows you to specify path queries in this fashion but transforms them into
+standard querystring url-encoded parameters before issuing HTTP requests.</p>
+</div>
+<div class="section" id="accessing-specific-items-in-a-collection">
+<h3>Accessing specific items in a Collection<a class="headerlink" href="#accessing-specific-items-in-a-collection" title="Permalink to this headline">¶</a></h3>
+<p>To access a specific entity in a collection, you should use it&#8217;s uuid or name.
+For example, to look up the user with the username of &#8216;john.doe&#8217;, one could do
+either of the following:</p>
+<div class="highlight-javascript"><pre>/users/john.doe
+/users/1c18ca40-90b2-11e0-b91b-12313f0204bb</pre>
+</div>
+<p>assuming that the user&#8217;s uuid was 1c18ca40-90b2-11e0-b91b-12313f0204bb.</p>
+<p>For example, the list of achievements for the user &#8220;ed&#8221;:</p>
+<div class="highlight-javascript"><pre>/users/ed/achievements</pre>
+</div>
+<p>The list of friends for the user &#8220;ed&#8221;:</p>
+<div class="highlight-javascript"><pre>/users/ed/friends/</pre>
+</div>
+<p>The list of achievements of the friends of the user &#8220;ed&#8221;:</p>
+<div class="highlight-javascript"><pre>/users/ed/friends/achievements</pre>
+</div>
+</div>
+<div class="section" id="query-parameters">
+<h3>Query Parameters<a class="headerlink" href="#query-parameters" title="Permalink to this headline">¶</a></h3>
+<p>The following query parameters can be passed in the querystring (or in a
+JSON-encode query):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="18%" />
+<col width="9%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>ql</td>
+<td>string</td>
+<td>a query in the query language</td>
+</tr>
+<tr><td>type</td>
+<td>string</td>
+<td>the entity type to return</td>
+</tr>
+<tr><td>reversed</td>
+<td>string</td>
+<td>return results in reverse order</td>
+</tr>
+<tr><td>connection</td>
+<td>string</td>
+<td>the connection type (i.e. &#8216;likes&#8217;)</td>
+</tr>
+<tr><td>start</td>
+<td>string</td>
+<td>the first entity UUID to return</td>
+</tr>
+<tr><td>cursor</td>
+<td>string</td>
+<td>an encoded representation of the query position for paging</td>
+</tr>
+<tr><td>limit</td>
+<td>integer</td>
+<td>the number of results to return</td>
+</tr>
+<tr><td>permission</td>
+<td>string</td>
+<td>a permission type</td>
+</tr>
+<tr><td>filter</td>
+<td>string</td>
+<td>a condition to filter on</td>
+</tr>
+</tbody>
+</table>
+<p>Queries are the place where most API&#8217;s struggle a bit, because the logical
+place to put a query is in the querystring, but what happens when you want to
+filter or query a collection somewhere other than at the end of the path? The
+URI specification addresses this by allowing a form of embedded querystrings
+inside the paths called matrix parameters.</p>
+<p>So, to Usergrid, this URL path:</p>
+<div class="highlight-javascript"><pre>/users/ed/friends;filter="location eq new york"/achievements?filter="level eq mayor"</pre>
+</div>
+<p>is interpreted as this:</p>
+<div class="highlight-javascript"><pre>/users/ed/friends/location="new york"/achievements/level="mayor"</pre>
+</div>
+<p>Again, we let you optionally use JSON-encoded queries and the URL path is human-readable:</p>
+<div class="highlight-javascript"><pre>/users/ed/friends/{"filter" : "location='new york'"}/achievements/{"filter" : "level='new mayor'"}</pre>
+</div>
+</div>
+</div>
+<div class="section" id="data-formats">
+<h2>Data Formats<a class="headerlink" href="#data-formats" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="request-data">
+<h3>Request Data<a class="headerlink" href="#request-data" title="Permalink to this headline">¶</a></h3>
+<p>When creating or modifying entities, you will supply information in the form
+of a JSON object in the body of the HTTP request.</p>
+<p>As per REST conventions, you create an entity by POSTing to a collection and
+you modify an entity by PUTting to an item in the collection.</p>
+<p>When posting an entity, you provide the initial data you want for the entity:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;username&quot;</span> <span class="o">:</span> <span class="s2">&quot;edanuff&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;email&quot;</span> <span class="o">:</span> <span class="s2">&quot;ed@anuff.com&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can create multiple entities in one request by supplying an array:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span> <span class="o">:</span> <span class="s2">&quot;edanuff&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span> <span class="o">:</span> <span class="s2">&quot;ed@anuff.com&quot;</span>
+  <span class="p">},</span>
+  <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span> <span class="o">:</span> <span class="s2">&quot;johndoe&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span> <span class="o">:</span> <span class="s2">&quot;john.doe@gmail.com&quot;</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="response-data">
+<h3>Response Data<a class="headerlink" href="#response-data" title="Permalink to this headline">¶</a></h3>
+<p>All API methods return a response object that typically contains an array of
+entities:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;entities&quot;</span> <span class="o">:</span> <span class="p">[</span>
+    <span class="p">...</span>
+  <span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Not everything can be included inside the entity, and some of the data that
+gets associated with specific entities isn&#8217;t part of their persistent
+representation. This is metadata, and can be part of the response as well as
+associated with a specific entity. Metadata is just an arbitrary key/value
+JSON structure.</p>
+<p>For example:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;entities&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;ed&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;metadata&quot;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;collections&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;activities&quot;</span><span class="p">,</span> <span class="s2">&quot;groups&quot;</span><span class="p">,</span> <span class="s2">&quot;followers&quot;</span><span class="p">]</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;metadata&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;baz&quot;</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Here&#8217;s a full example of the response object with one entity in the response
+(Note that the facebook property, which contains the entire facebook profile
+of the user, is not displayed in the example due to it&#8217;s size):</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span> <span class="o">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span> <span class="o">:</span> <span class="s2">&quot;ddde7630-90b1-11e0-b91b-12313f0204bb&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="p">},</span>
+  <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;uri&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/ddde7630-90b1-11e0-b91b-12313f0204bb/users&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span> <span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;created&quot;</span> <span class="o">:</span> <span class="mi">1307415547108000</span><span class="p">,</span>
+      <span class="s2">&quot;facebook&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+      <span class="s2">&quot;uuid&quot;</span> <span class="o">:</span> <span class="s2">&quot;1c18ca40-90b2-11e0-b91b-12313f0204bb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;metadata&quot;</span> <span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;collections&quot;</span> <span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;activities&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb/activities&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;feed&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb/feed&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;groups&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb/groups&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;messages&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb/messages&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb/queue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;roles&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb/roles&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;following&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb/following&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;followers&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb/followers&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;sets&quot;</span> <span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;rolenames&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb/rolenames&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;permissions&quot;</span> <span class="o">:</span> <span class="s2">&quot;/users/1c18ca40-90b2-11e0-b91b-12313f0204bb/permissions&quot;</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;modified&quot;</span> <span class="o">:</span> <span class="mi">1307415547108000</span><span class="p">,</span>
+      <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;picture&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://profile.ak.fbcdn.net/hprofile-ak-snc4/41501_217925_2656_q.jpg&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;username&quot;</span> <span class="o">:</span> <span class="s2">&quot;john.doe&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1309218486419</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span> <span class="o">:</span> <span class="mi">40</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="data_model.html">Data Model</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="queries.html">Queries</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

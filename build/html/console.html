@@ -1,0 +1,523 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Getting Started With The Administration Console &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="index.html" />
+    <link rel="next" title="Authentication &amp; Authorization" href="auth.html" />
+    <link rel="prev" title="Overview and Key Concepts" href="overview.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Getting Started With The Administration Console</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="overview.html">Overview and Key Concepts</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="auth.html">Authentication &amp; Authorization</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="getting-started-with-the-administration-console">
+<h1>Getting Started With The Administration Console<a class="headerlink" href="#getting-started-with-the-administration-console" title="Permalink to this headline">¶</a></h1>
+<p>The Usergrid Console is the primary administrative user interface for working
+with Usergrid. The Console is also the most complete reference application for
+using Usergrid from Javascript and is fully open source and forkable on GitHub
+at <a class="reference external" href="https://github.com/usergrid/console">https://github.com/usergrid/console</a>. This lets you easily extend it or embed it
+into your own applications and to inspect the code to see the recommend ways
+for interacting with our API. The Usergrid Javascript client is part of the
+Console project.</p>
+<div class="section" id="signing-up-for-usergrid">
+<h2>Signing up for Usergrid<a class="headerlink" href="#signing-up-for-usergrid" title="Permalink to this headline">¶</a></h2>
+<p>You can sign up for the Usergrid.com service via the Console. While
+Usergrid.com account creation is entirely performed via our public REST API,
+please be aware that there are steps to the signup process for new
+Usergrid.com accounts that are performed &#8220;sideband&#8221;. Specifically, new
+accounts receive a confirmation email that contains a URL which must be
+clicked on to activate the account. This URL is on our website but you can
+specify where it redirects to afterwards.</p>
+<p>Please note that this is only for Usergrid.com accounts. For your user
+accounts, you can completely control the registration flow and there is no
+need for it to pass through our website or URLs at all.</p>
+</div>
+<div class="section" id="account-home">
+<h2>Account Home<a class="headerlink" href="#account-home" title="Permalink to this headline">¶</a></h2>
+<p>When you log into the Console, you&#8217;ll be presented with your Organizations
+home dashboard. This will list the applications associated with the current
+organization account as well as the recent activities by administrators that
+are part of the organization. You&#8217;ll also be able to see a list of the other
+administrators associated with the account and invite new administrators to
+the organization.</p>
+<div class="section" id="administration-of-multiple-organizations">
+<h3>Administration of Multiple Organizations<a class="headerlink" href="#administration-of-multiple-organizations" title="Permalink to this headline">¶</a></h3>
+<p>It&#8217;s possible to be an administrator for multiple Organizations, although the
+Console is designed to primarily let you work within the context of one
+Organizations account. There&#8217;s a popup menu in the upper right hand corner of
+the Console where you can easily switch between Organizations accounts that
+you have administrative access to.</p>
+</div>
+</div>
+<div class="section" id="getting-authentication-credentials">
+<h2>Getting Authentication Credentials<a class="headerlink" href="#getting-authentication-credentials" title="Permalink to this headline">¶</a></h2>
+<p>The Console provides a convenient way to retrieve your oAuth credentials for
+API access. You can also set your password for HTTP Basic authentication from
+the Console. On the Organizations Home page, you can get the oAuth credentials
+for Organization-wide access to the Organization settings and all Applications
+owned by the Organizations. The Application Dashboard provides access to the
+oAuth credentials for that specific Application.</p>
+</div>
+<div class="section" id="exploring-the-api-using-the-console-shell">
+<h2>Exploring The API Using The Console Shell<a class="headerlink" href="#exploring-the-api-using-the-console-shell" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-a-new-application">
+<h3>Create A New Application<a class="headerlink" href="#create-a-new-application" title="Permalink to this headline">¶</a></h3>
+<p>When you create a new Organization account, you&#8217;ll log in and you&#8217;ll see that
+you don&#8217;t have any applications associated with that account. Click on &#8220;New
+Application&#8221; in your Organization Home page and you&#8217;ll be presented with a
+dialog box that prompts you for the information need to create a new app. Once
+your app is created, a number of options will become enabled for viewing and
+administering your app&#8217;s data. Before you get started with the high-level
+tools, you should go to the left-hand sidebar and click the &#8220;Shell&#8221; button to
+try out a few basic API commands.</p>
+</div>
+<div class="section" id="shell">
+<h3>Shell<a class="headerlink" href="#shell" title="Permalink to this headline">¶</a></h3>
+<p>The Shell view is the simpler way to get started using the Usergrid API. It provides
+a command-line environment within your web browser for trying out interactive
+commands.  One thing to keep in mind when using it is that Usergrid API endpoints
+usually take the form of:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/test-app/users</span>
+</pre></div>
+</div>
+<p>where &#8220;my-app-id&#8221; is your application identifier and &#8220;users&#8221; referes to the
+collection of user objects in your application.</p>
+<p>When using the Console Shell, you omit everything through the application identifier,
+so the above url, which would list all the users in the application &#8220;test-app&#8221;, would
+instead simply be:</p>
+<div class="highlight-javascript"><pre>/users</pre>
+</div>
+<p>If you type the above command into the console shell, it&#8217;s the same as an HTTP
+GET command to the API endpoint for the currently selected console application
+(selected using the app pull-down menu in the console&#8217;s left sidebar). When
+you type that in, you should see something like this:</p>
+<div class="highlight-javascript"><pre>&gt; /users
+/users
+{
+  "action": "get",
+  "application": "1c8f60e4-da67-11e0-b93d-12313f0204bb",
+  "params": {
+    "_": [
+      "1315523877714"
+    ]
+  },
+  "path": "/users",
+  "uri": "http://api.usergrid.com/1c8f60e4-da67-11e0-b93d-12313f0204bb/users",
+  "entities": [],
+  "timestamp": 1315523877481,
+  "duration": 36
+}
+&gt;</pre>
+</div>
+<p><em>Please Note</em> It can take a few moments after you&#8217;ve hit return for the
+results of your command to arrive. This is a UI bug that will get fixed in
+upcoming releases.</p>
+<p>To create a new user object, enter the following and hit return:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">post</span> <span class="o">/</span><span class="nx">users</span> <span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="o">:</span><span class="s2">&quot;john.doe&quot;</span><span class="p">,</span><span class="s2">&quot;email&quot;</span><span class="o">:</span><span class="s2">&quot;john.doe@gmail.com&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p><em>Note</em> that there is a space after the path and before the JSON representation.</p>
+<p>You&#8217;ve now created your first user in your application.  You should see the following displayed as a result:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nx">post</span> <span class="o">/</span><span class="nx">users</span> <span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="o">:</span><span class="s2">&quot;john.doe&quot;</span><span class="p">,</span><span class="s2">&quot;email&quot;</span><span class="o">:</span><span class="s2">&quot;john.doe@gmail.com&quot;</span><span class="p">}</span>
+<span class="o">/</span><span class="nx">users</span>
+<span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;1c8f60e4-da67-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/users&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/1c8f60e4-da67-11e0-b93d-12313f0204bb/users&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;0e47f040-da71-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;username&quot;</span><span class="o">:</span> <span class="s2">&quot;john.doe&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;email&quot;</span><span class="o">:</span> <span class="s2">&quot;john.doe@gmail.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315523992687007</span><span class="p">,</span>
+      <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315523992687007</span><span class="p">,</span>
+      <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;collections&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;activities&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb/activities&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;feed&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb/feed&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;groups&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb/groups&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;messages&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb/messages&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;queue&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb/queue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;roles&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb/roles&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;following&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb/following&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;followers&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb/followers&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;sets&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;rolenames&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb/rolenames&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;permissions&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/0e47f040-da71-11e0-b93d-12313f0204bb/permissions&quot;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315523992585</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">162</span>
+<span class="p">}</span>
+<span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Enter the follow command to create another user:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">post</span> <span class="o">/</span><span class="nx">users</span> <span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="o">:</span><span class="s2">&quot;jane.doe&quot;</span><span class="p">,</span><span class="s2">&quot;email&quot;</span><span class="o">:</span><span class="s2">&quot;jane.doe@gmail.com&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>You&#8217;ll see the following result:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nx">post</span> <span class="o">/</span><span class="nx">users</span> <span class="p">{</span><span class="s2">&quot;username&quot;</span><span class="o">:</span><span class="s2">&quot;jane.doe&quot;</span><span class="p">,</span><span class="s2">&quot;email&quot;</span><span class="o">:</span><span class="s2">&quot;jane.doe@gmail.com&quot;</span><span class="p">}</span>
+<span class="o">/</span><span class="nx">users</span>
+<span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;1c8f60e4-da67-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/users&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/1c8f60e4-da67-11e0-b93d-12313f0204bb/users&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;78c54a82-da71-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;username&quot;</span><span class="o">:</span> <span class="s2">&quot;jane.doe&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;email&quot;</span><span class="o">:</span> <span class="s2">&quot;jane.doe@gmail.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315524171347008</span><span class="p">,</span>
+      <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315524171347008</span><span class="p">,</span>
+      <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;collections&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;activities&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/activities&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;feed&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/feed&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;groups&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/groups&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;messages&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/messages&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;queue&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/queue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;roles&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/roles&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;following&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/following&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;followers&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/followers&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;sets&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;rolenames&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/rolenames&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;permissions&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/permissions&quot;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315524171329</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">110</span>
+<span class="p">}</span>
+<span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Now enter the command to list the elements of the &#8220;users&#8221; collection again:</p>
+<div class="highlight-javascript"><pre>/users</pre>
+</div>
+<p>You&#8217;ll see the following:</p>
+<div class="highlight-javascript"><pre>&gt; /users
+/users
+{
+  "action": "get",
+  "application": "1c8f60e4-da67-11e0-b93d-12313f0204bb",
+  "params": {
+    "_": [
+      "1315524221412"
+    ]
+  },
+  "path": "/users",
+  "uri": "http://api.usergrid.com/1c8f60e4-da67-11e0-b93d-12313f0204bb/users",
+  "entities": [
+    {
+      "uuid": "0e47f040-da71-11e0-b93d-12313f0204bb",
+      "type": "user",
+      "created": 1315523992687007,
+      "modified": 1315523992687007,
+      "email": "john.doe@gmail.com",
+      "metadata": {
+        "path": "/users/0e47f040-da71-11e0-b93d-12313f0204bb",
+        "collections": {
+          "activities": "/users/0e47f040-da71-11e0-b93d-12313f0204bb/activities",
+          "feed": "/users/0e47f040-da71-11e0-b93d-12313f0204bb/feed",
+          "groups": "/users/0e47f040-da71-11e0-b93d-12313f0204bb/groups",
+          "messages": "/users/0e47f040-da71-11e0-b93d-12313f0204bb/messages",
+          "queue": "/users/0e47f040-da71-11e0-b93d-12313f0204bb/queue",
+          "roles": "/users/0e47f040-da71-11e0-b93d-12313f0204bb/roles",
+          "following": "/users/0e47f040-da71-11e0-b93d-12313f0204bb/following",
+          "followers": "/users/0e47f040-da71-11e0-b93d-12313f0204bb/followers"
+        },
+        "sets": {
+          "rolenames": "/users/0e47f040-da71-11e0-b93d-12313f0204bb/rolenames",
+          "permissions": "/users/0e47f040-da71-11e0-b93d-12313f0204bb/permissions"
+        }
+      },
+      "username": "john.doe"
+    },
+    {
+      "uuid": "78c54a82-da71-11e0-b93d-12313f0204bb",
+      "type": "user",
+      "created": 1315524171347008,
+      "modified": 1315524171347008,
+      "email": "jane.doe@gmail.com",
+      "metadata": {
+        "path": "/users/78c54a82-da71-11e0-b93d-12313f0204bb",
+        "collections": {
+          "activities": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/activities",
+          "feed": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/feed",
+          "groups": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/groups",
+          "messages": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/messages",
+          "queue": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/queue",
+          "roles": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/roles",
+          "following": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/following",
+          "followers": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/followers"
+        },
+        "sets": {
+          "rolenames": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/rolenames",
+          "permissions": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/permissions"
+        }
+      },
+      "username": "jane.doe"
+    }
+  ],
+  "timestamp": 1315524225021,
+  "duration": 59
+}
+&gt;</pre>
+</div>
+<p>To retrieve a specific user, try the following:</p>
+<div class="highlight-javascript"><pre>/users/jane.doe</pre>
+</div>
+<p>You&#8217;ll see the following:</p>
+<div class="highlight-javascript"><pre>&gt; /users/jane.doe
+/users/jane.doe
+{
+  "action": "get",
+  "application": "1c8f60e4-da67-11e0-b93d-12313f0204bb",
+  "params": {
+    "_": [
+      "1315524419746"
+    ]
+  },
+  "path": "/users",
+  "uri": "http://api.usergrid.com/1c8f60e4-da67-11e0-b93d-12313f0204bb/users",
+  "entities": [
+    {
+      "uuid": "78c54a82-da71-11e0-b93d-12313f0204bb",
+      "type": "user",
+      "created": 1315524171347008,
+      "modified": 1315524171347008,
+      "email": "jane.doe@gmail.com",
+      "metadata": {
+        "path": "/users/78c54a82-da71-11e0-b93d-12313f0204bb",
+        "collections": {
+          "activities": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/activities",
+          "feed": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/feed",
+          "groups": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/groups",
+          "messages": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/messages",
+          "queue": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/queue",
+          "roles": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/roles",
+          "following": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/following",
+          "followers": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/followers"
+        },
+        "sets": {
+          "rolenames": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/rolenames",
+          "permissions": "/users/78c54a82-da71-11e0-b93d-12313f0204bb/permissions"
+        }
+      },
+      "username": "jane.doe"
+    }
+  ],
+  "timestamp": 1315524421071,
+  "duration": 107
+}
+&gt;</pre>
+</div>
+<p>Now, let&#8217;s add some information to this user, type the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">put</span> <span class="o">/</span><span class="nx">users</span><span class="o">/</span><span class="nx">jane</span><span class="p">.</span><span class="nx">doe</span> <span class="p">{</span><span class="s2">&quot;city&quot;</span> <span class="o">:</span> <span class="s2">&quot;san francisco&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>You should see the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nx">put</span> <span class="o">/</span><span class="nx">users</span><span class="o">/</span><span class="nx">jane</span><span class="p">.</span><span class="nx">doe</span> <span class="p">{</span><span class="s2">&quot;city&quot;</span> <span class="o">:</span> <span class="s2">&quot;san francisco&quot;</span> <span class="p">}</span>
+<span class="o">/</span><span class="nx">users</span><span class="o">/</span><span class="nx">jane</span><span class="p">.</span><span class="nx">doe</span>
+<span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;put&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;1c8f60e4-da67-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/users&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/1c8f60e4-da67-11e0-b93d-12313f0204bb/users&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;78c54a82-da71-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315524171347008</span><span class="p">,</span>
+      <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315524526405008</span><span class="p">,</span>
+      <span class="s2">&quot;city&quot;</span><span class="o">:</span> <span class="s2">&quot;san francisco&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;email&quot;</span><span class="o">:</span> <span class="s2">&quot;jane.doe@gmail.com&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;collections&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;activities&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/activities&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;feed&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/feed&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;groups&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/groups&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;messages&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/messages&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;queue&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/queue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;roles&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/roles&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;following&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/following&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;followers&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/followers&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;sets&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;rolenames&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/rolenames&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;permissions&quot;</span><span class="o">:</span> <span class="s2">&quot;/users/78c54a82-da71-11e0-b93d-12313f0204bb/permissions&quot;</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;username&quot;</span><span class="o">:</span> <span class="s2">&quot;jane.doe&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315524526343</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">84</span>
+<span class="p">}</span>
+<span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Let&#8217;s create another type of object.  Type the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">post</span> <span class="o">/</span><span class="nx">cats</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;felix&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>You&#8217;ll see the following:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nx">post</span> <span class="o">/</span><span class="nx">cats</span> <span class="p">{</span><span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;felix&quot;</span><span class="p">}</span>
+<span class="o">/</span><span class="nx">cats</span>
+<span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;1c8f60e4-da67-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/cats&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/1c8f60e4-da67-11e0-b93d-12313f0204bb/cats&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;89a05d85-da72-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315524629123008</span><span class="p">,</span>
+      <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315524629123008</span><span class="p">,</span>
+      <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/cats/89a05d85-da72-11e0-b93d-12313f0204bb&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;felix&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315524629068</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">107</span>
+<span class="p">}</span>
+<span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Now let&#8217;s update this object:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">put</span> <span class="o">/</span><span class="nx">cats</span><span class="o">/</span><span class="nx">felix</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span> <span class="o">:</span> <span class="s2">&quot;black&quot;</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>You&#8217;ll see the following results:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&gt;</span> <span class="nx">put</span> <span class="o">/</span><span class="nx">cats</span><span class="o">/</span><span class="nx">felix</span> <span class="p">{</span><span class="s2">&quot;color&quot;</span> <span class="o">:</span> <span class="s2">&quot;black&quot;</span><span class="p">}</span>
+<span class="o">/</span><span class="nx">cats</span><span class="o">/</span><span class="nx">felix</span>
+<span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;put&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;1c8f60e4-da67-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+  <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/cats&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/1c8f60e4-da67-11e0-b93d-12313f0204bb/cats&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;89a05d85-da72-11e0-b93d-12313f0204bb&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;cat&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315524629123008</span><span class="p">,</span>
+      <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315524724093008</span><span class="p">,</span>
+      <span class="s2">&quot;color&quot;</span><span class="o">:</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/cats/89a05d85-da72-11e0-b93d-12313f0204bb&quot;</span>
+      <span class="p">},</span>
+      <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;felix&quot;</span>
+    <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315524724058</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">57</span>
+<span class="p">}</span>
+<span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>You can now click on the &#8220;Collections&#8221; button in the sidebar to see all the
+collections in your application. You&#8217;ll see that there&#8217;s two objects in the
+&#8220;users&#8221; collection and one in the &#8220;cats&#8221; collection. Feel free to navigate
+around and see how the Collections explore provides a high-level alternative
+to the API for viewing and manipulating your application objects.</p>
+<p>This shows the basics of creating and updating objects in Usergrid. Subsequent
+sections of the documentation will provide more detail on how this all works.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="overview.html">Overview and Key Concepts</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="auth.html">Authentication &amp; Authorization</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

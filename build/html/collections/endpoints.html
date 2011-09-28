@@ -1,0 +1,677 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API Endpoints &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="up" title="Entities &amp; Collections" href="index.html" />
+    <link rel="next" title="User Management" href="../users/index.html" />
+    <link rel="prev" title="Queries" href="queries.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>API Endpoints</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="queries.html">Queries</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../users/index.html">User Management</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="api-endpoints">
+<h1>API Endpoints<a class="headerlink" href="#api-endpoints" title="Permalink to this headline">¶</a></h1>
+<p>Please remember to include an access_token with all API calls unless the
+documentation explicitly says it&#8217;s not necessary.</p>
+<div class="section" id="create-a-new-entity">
+<h2>Create A New Entity<a class="headerlink" href="#create-a-new-entity" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-post-app_id-collection-">
+<tt class="descclassname deschttpmethod">POST </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em></span></tt><a class="headerlink" href="#method-post-app_id-collection-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single set of entity properties:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;b&quot;</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span> <span class="o">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Or an array of entity properties in order to create multiple
+entities:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">[</span> <span class="p">{</span> <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;bar&quot;</span> <span class="p">},</span> <span class="p">{</span> <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;baz&quot;</span><span class="p">}</span> <span class="p">]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body">Example of newly created entity result:</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;438a1ca1-cf9b-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/438a1ca1-cf9b-11e0-bcc1-12313f0204bb/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;thing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;c&quot;</span><span class="o">:</span> <span class="mi">2</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;foo&quot;</span><span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things/4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315357451949</span><span class="p">,</span>
+    <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">52</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Post an entity to the specified collection. <em>Collections do not need to be defined
+before being used, simply posting to a collection creates the collection if it
+doesn&#8217;t already exist</em>.</p>
+<p>Entity contents are specified in JSON format. Any valid JSON object can be
+stored in entity, regardless of level of complexity, not just name/value
+pairs.</p>
+<p>Entity types are defined by the collection being posted to.  For example, posting
+to a collection named &#8220;cats&#8221; will create entities of type &#8220;cat&#8221;.</p>
+<p><em>All user-defined properties are indexed</em>.  You don&#8217;t need to do anything special
+to have your entities fully indexed by the system.  Strings that contain multiple
+words are keyword indexed as well.</p>
+<p>For all application-specific entities, you can provide a property called
+&#8220;name&#8221; that you can use to retrieve the entity rather than it&#8217;s UUID. The
+value for the &#8220;name&#8221; property must be unique. Some system-provided
+entities, like User, define a different property to be used for finding an
+entity. For example, User entities specify the &#8220;username&#8221; property rather
+than &#8220;name&#8221;. Refer to the Entity Reference for details.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="get-an-entity-by-entity-uuid-or-name">
+<h2>Get An Entity By Entity UUID Or Name<a class="headerlink" href="#get-an-entity-by-entity-uuid-or-name" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-get-app_id-collection-uuidname-">
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">uuid|name</span>}</em></span></tt><a class="headerlink" href="#method-get-app_id-collection-uuidname-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+<li><strong>uuid|name</strong> (<em>uuid|string</em>) &#8211; an entity uuid or name</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of entity result:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;438a1ca1-cf9b-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/438a1ca1-cf9b-11e0-bcc1-12313f0204bb/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;thing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;c&quot;</span><span class="o">:</span> <span class="mi">2</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;foo&quot;</span><span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things/4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315357451949</span><span class="p">,</span>
+    <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">52</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Gets the message with the specified UUID or entity lookup name property.</p>
+<p>For any application-specific entity type, if you have a &#8220;name&#8221; property
+specified for the entity, you can provide that instead of the uuid to
+lookup the entity. For system-provided entities, there might be a different
+property than &#8220;name&#8221; defined for doing lookups. For example, the User
+entity defines &#8220;username&#8221; as it&#8217;s lookup property. Refer to the Entity
+Reference to see if there&#8217;s an alternate lookup property defined for any
+system-provided entity types you&#8217;re using.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="update-an-entity">
+<h2>Update An Entity<a class="headerlink" href="#update-an-entity" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-put-app_id-collection-uuidname-">
+<tt class="descclassname deschttpmethod">PUT </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">uuid|name</span>}</em></span></tt><a class="headerlink" href="#method-put-app_id-collection-uuidname-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+<li><strong>uuid|name</strong> (<em>uuid|string</em>) &#8211; an entity uuid or name</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single set of entity properties:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;alpha&quot;</span> <span class="o">:</span> <span class="s2">&quot;bravo&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body">Example of updated entity result:</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;438a1ca1-cf9b-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/438a1ca1-cf9b-11e0-bcc1-12313f0204bb/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;thing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;c&quot;</span><span class="o">:</span> <span class="mi">2</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;alpha&quot;</span><span class="o">:</span> <span class="s2">&quot;bravo&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;foo&quot;</span><span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things/4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315357451949</span><span class="p">,</span>
+    <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">52</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Update an entity in a collection.  The new property values are stored in the entity.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="delete-an-entity-by-entity-uuid-or-name">
+<h2>Delete An Entity By Entity UUID Or Name<a class="headerlink" href="#delete-an-entity-by-entity-uuid-or-name" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt>
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">uuid|name</span>}</em></span></tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+<li><strong>uuid|name</strong> (<em>uuid|string</em>) &#8211; an entity uuid or name</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of deleted entity result:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;post&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;438a1ca1-cf9b-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/438a1ca1-cf9b-11e0-bcc1-12313f0204bb/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;thing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;c&quot;</span><span class="o">:</span> <span class="mi">2</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;foo&quot;</span><span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things/4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315357451949</span><span class="p">,</span>
+    <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">52</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Deletes the message with the specified UUID or entity lookup name property.</p>
+<p>Returns the contents of the deleted entity.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="query-a-collection">
+<h2>Query A Collection<a class="headerlink" href="#query-a-collection" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-get-app_id-collection-ql-reversed-start-cursor-limit-permission-filter-">
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em></span><span class="deschttpquery">?<em class="deschttpqueryparam">ql=</em>&amp;<em class="deschttpqueryparam">reversed=</em>&amp;<em class="deschttpqueryparam">start=</em>&amp;<em class="deschttpqueryparam">cursor=</em>&amp;<em class="deschttpqueryparam">limit=</em>&amp;<em class="deschttpqueryparam">permission=</em>&amp;<em class="deschttpqueryparam">filter=</em></span></tt><a class="headerlink" href="#method-get-app_id-collection-ql-reversed-start-cursor-limit-permission-filter-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<li><strong>ql</strong> (<em>string</em>) &#8211; a query in the query language</li>
+<li><strong>reversed</strong> (<em>string</em>) &#8211; return results in reverse order</li>
+<li><strong>start</strong> (<em>uuid</em>) &#8211; the first entity UUID to return</li>
+<li><strong>cursor</strong> (<em>string</em>) &#8211; an encoded representation of the query position for paging</li>
+<li><strong>limit</strong> (<em>integer</em>) &#8211; the number of results to return (default=10)</li>
+<li><strong>permission</strong> (<em>string</em>) &#8211; a permission type</li>
+<li><strong>filter</strong> (<em>string</em>) &#8211; a condition to filter on (multiple allowed)</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of single entity query result:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;438a1ca1-cf9b-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/438a1ca1-cf9b-11e0-bcc1-12313f0204bb/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;thing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;c&quot;</span><span class="o">:</span> <span class="mi">2</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;foo&quot;</span><span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things/4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315357451949</span><span class="p">,</span>
+    <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">52</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Retrieves the set of entities that meet the query criteria or all entities
+(up to limit or 10) if no query or filters are provided. See the Queries
+section for details on the options for querying or filtering.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="update-a-collection-by-query">
+<h2>Update A Collection By Query<a class="headerlink" href="#update-a-collection-by-query" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-put-app_id-collection-ql-reversed-permission-filter-">
+<tt class="descclassname deschttpmethod">PUT </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em></span><span class="deschttpquery">?<em class="deschttpqueryparam">ql=</em>&amp;<em class="deschttpqueryparam">reversed=</em>&amp;<em class="deschttpqueryparam">permission=</em>&amp;<em class="deschttpqueryparam">filter=</em></span></tt><a class="headerlink" href="#method-put-app_id-collection-ql-reversed-permission-filter-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<li><strong>ql</strong> (<em>string</em>) &#8211; a query in the query language</li>
+<li><strong>permission</strong> (<em>string</em>) &#8211; a permission type</li>
+<li><strong>filter</strong> (<em>string</em>) &#8211; a condition to filter on (multiple allowed)</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">A set of entity properties:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;alpha&quot;</span> <span class="o">:</span> <span class="s2">&quot;bravo&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body">Example result of single entity updated by query:</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;438a1ca1-cf9b-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/438a1ca1-cf9b-11e0-bcc1-12313f0204bb/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;thing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;c&quot;</span><span class="o">:</span> <span class="mi">2</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;alpha&quot;</span><span class="o">:</span> <span class="s2">&quot;bravo&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;foo&quot;</span><span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things/4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315357451949</span><span class="p">,</span>
+    <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">52</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Updates all entities that meet the specified criteria.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="query-an-entity-s-collections-or-connections">
+<h2>Query An Entity&#8217;s Collections or Connections<a class="headerlink" href="#query-an-entity-s-collections-or-connections" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-get-app_id-collection-entity_id-relationship-ql-type-reversed-start-cursor-limit-permission-filter-">
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">entity_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">relationship</span>}</em></span><span class="deschttpquery">?<em class="deschttpqueryparam">ql=</em>&amp;<em class="deschttpqueryparam">type=</em>&amp;<em class="deschttpqueryparam">reversed=</em>&amp;<em class="deschttpqueryparam">start=</em>&amp;<em class="deschttpqueryparam">cursor=</em>&amp;<em class="deschttpqueryparam">limit=</em>&amp;<em class="deschttpqueryparam">permission=</em>&amp;<em class="deschttpqueryparam">filter=</em></span></tt><a class="headerlink" href="#method-get-app_id-collection-entity_id-relationship-ql-type-reversed-start-cursor-limit-permission-filter-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+<li><strong>entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
+<li><strong>relationship</strong> (<em>string</em>) &#8211; a collection name or connection type (i.e. &#8220;likes&#8221;)</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<li><strong>ql</strong> (<em>string</em>) &#8211; a query in the query language</li>
+<li><strong>type</strong> (<em>string</em>) &#8211; the entity type to return</li>
+<li><strong>reversed</strong> (<em>string</em>) &#8211; return results in reverse order</li>
+<li><strong>connection</strong> (<em>string</em>) &#8211; the connection type (i.e. &#8216;likes&#8217;)</li>
+<li><strong>start</strong> (<em>uuid</em>) &#8211; the first entity UUID to return</li>
+<li><strong>cursor</strong> (<em>string</em>) &#8211; an encoded representation of the query position for paging</li>
+<li><strong>limit</strong> (<em>integer</em>) &#8211; the number of results to return (default=10)</li>
+<li><strong>permission</strong> (<em>string</em>) &#8211; a permission type</li>
+<li><strong>filter</strong> (<em>string</em>) &#8211; a condition to filter on (multiple allowed)</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of single entity result:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;action&quot;</span><span class="o">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="s2">&quot;438a1ca1-cf9b-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;params&quot;</span><span class="o">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uri&quot;</span><span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/438a1ca1-cf9b-11e0-bcc1-12313f0204bb/things&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;entities&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;thing&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1315357451966016</span><span class="p">,</span>
+            <span class="s2">&quot;a&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;b&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+                <span class="s2">&quot;c&quot;</span><span class="o">:</span> <span class="mi">2</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;alpha&quot;</span><span class="o">:</span> <span class="s2">&quot;bravo&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;foo&quot;</span><span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;metadata&quot;</span><span class="o">:</span> <span class="p">{</span>
+                <span class="s2">&quot;path&quot;</span><span class="o">:</span> <span class="s2">&quot;/things/4c469e8a-d8ed-11e0-bcc1-12313f0204bb&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;timestamp&quot;</span><span class="o">:</span> <span class="mi">1315357451949</span><span class="p">,</span>
+    <span class="s2">&quot;duration&quot;</span><span class="o">:</span> <span class="mi">52</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Retrieves the set of entities that meet the query criteria or all entities
+(up to limit or 10) if no query or filters are provided. See the Queries
+section for details on the options for querying or filtering.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="put-an-entity-into-a-collection-or-create-a-connection">
+<h2>Put An Entity Into A Collection Or Create A Connection<a class="headerlink" href="#put-an-entity-into-a-collection-or-create-a-connection" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-post-app_id-collection-first_entity_id-relationship-second_entity_id-">
+<tt class="descclassname deschttpmethod">POST </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">first_entity_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">relationship</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">second_entity_id</span>}</em></span></tt><a class="headerlink" href="#method-post-app_id-collection-first_entity_id-relationship-second_entity_id-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+<li><strong>first_entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
+<li><strong>relationship</strong> (<em>string</em>) &#8211; a collection name or connection type (i.e. &#8220;likes&#8221;)</li>
+<li><strong>second_entity_id</strong> (<em>uuid</em>) &#8211; entity UUID</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If {relationship} is a collection (such as a Group&#8217;s &#8220;users&#8221; collection),
+adds the second entity to the first entity&#8217;s collection of the specified
+name. In the case of a Group, this is how you&#8217;d add Users as members of the
+Group:</p>
+<div class="highlight-javascript"><pre>POST /my-app/groups/employees/users/ed@anuff.com</pre>
+</div>
+<p>If {relationship} is not defined for the entity, a connection is create.
+For example, if the relationship is defined as &#8220;likes&#8221;, the second entity
+is connected to the first with a &#8220;likes&#8221; relationship:</p>
+<div class="highlight-javascript"><pre>POST /my-app/users/ed@anuff.com/likes/4c469e8a-d8ed-11e0-bcc1-12313f0204bb</pre>
+</div>
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="method">
+<dt id="method-post-app_id-collection-first_entity_id-relationship-second_entity_type-second_entity_id-">
+<tt class="descclassname deschttpmethod">POST </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">first_entity_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">relationship</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">second_entity_type</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">second_entity_id</span>}</em></span></tt><a class="headerlink" href="#method-post-app_id-collection-first_entity_id-relationship-second_entity_type-second_entity_id-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+<li><strong>first_entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
+<li><strong>relationship</strong> (<em>string</em>) &#8211; a collection name or connection type (i.e. &#8220;likes&#8221;)</li>
+<li><strong>second_entity_type</strong> (<em>string</em>) &#8211; the type of the second entity</li>
+<li><strong>second_entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>When creating a connection, if you specify the entity type for the second
+entity, then you can create the connection using the entity&#8217;s name rather
+than it&#8217;s uuid. For example:</p>
+<div class="highlight-javascript"><pre>POST /my-app/users/ed@anuff.com/likes/food/pizza</pre>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="remove-an-entity-from-a-collection-or-delete-a-connection">
+<h2>Remove An Entity From A Collection Or Delete A Connection<a class="headerlink" href="#remove-an-entity-from-a-collection-or-delete-a-connection" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-delete-app_id-collection-first_entity_id-relationship-second_entity_id-">
+<tt class="descclassname deschttpmethod">DELETE </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">first_entity_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">relationship</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">second_entity_id</span>}</em></span></tt><a class="headerlink" href="#method-delete-app_id-collection-first_entity_id-relationship-second_entity_id-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+<li><strong>first_entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
+<li><strong>relationship</strong> (<em>string</em>) &#8211; a collection name or connection type (i.e. &#8220;likes&#8221;)</li>
+<li><strong>second_entity_id</strong> (<em>uuid</em>) &#8211; entity UUID</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>If {relationship} is a collection (such as a Group&#8217;s &#8220;users&#8221; collection),
+removes the second entity from the first entity&#8217;s collection of the
+specified name. In the case of a Group, this is how you&#8217;d remove Users as
+members of the Group:</p>
+<div class="highlight-javascript"><pre>DELETE /my-app/groups/employees/users/ed@anuff.com</pre>
+</div>
+<p>For connections, provide the connection type. For example, if the
+relationship is defined as &#8220;likes&#8221;, the second entity is connected to the
+first with a &#8220;likes&#8221; relationship:</p>
+<div class="highlight-javascript"><pre>DELETE /my-app/users/ed@anuff.com/likes/4c469e8a-d8ed-11e0-bcc1-12313f0204bb</pre>
+</div>
+</dd></dl>
+
+<hr class="docutils" />
+<dl class="method">
+<dt id="method-delete-app_id-collection-first_entity_id-relationship-second_entity_type-second_entity_id-">
+<tt class="descclassname deschttpmethod">DELETE </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">collection</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">first_entity_id</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">relationship</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">second_entity_type</span>}</em>/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">second_entity_id</span>}</em></span></tt><a class="headerlink" href="#method-delete-app_id-collection-first_entity_id-relationship-second_entity_type-second_entity_id-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
+<li><strong>first_entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
+<li><strong>relationship</strong> (<em>string</em>) &#8211; a collection name or connection type (i.e. &#8220;likes&#8221;)</li>
+<li><strong>second_entity_type</strong> (<em>string</em>) &#8211; the type of the second entity</li>
+<li><strong>second_entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>When deleting a connection, if you specify the entity type for the second
+entity, then you can delete the connection using the entity&#8217;s name rather
+than it&#8217;s uuid. For example:</p>
+<div class="highlight-javascript"><pre>DELETE /my-app/users/ed@anuff.com/likes/food/pizza</pre>
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="queries.html">Queries</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="../users/index.html">User Management</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

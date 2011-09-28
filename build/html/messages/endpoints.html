@@ -1,0 +1,571 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>API Endpoints &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="up" title="Message Queue" href="index.html" />
+    <link rel="next" title="Realtime Delivery With Websocket" href="realtime.html" />
+    <link rel="prev" title="Service Gateways &amp; Push Notifications" href="gateways.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>API Endpoints</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="gateways.html">Service Gateways &amp; Push Notifications</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="realtime.html">Realtime Delivery With Websocket</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="api-endpoints">
+<h1>API Endpoints<a class="headerlink" href="#api-endpoints" title="Permalink to this headline">¶</a></h1>
+<p>Please remember to include an access_token with all API calls unless the
+documentation explicitly says it&#8217;s not necessary.</p>
+<div class="section" id="post-messages">
+<h2>Post Messages<a class="headerlink" href="#post-messages" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-post-app_id-queues-path-to-queue-cascade-true-ql-">
+<tt class="descclassname deschttpmethod">POST </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/queues/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/queue</span>}</em></span><span class="deschttpquery">?<em class="deschttpqueryparam">cascade=true</em>&amp;<em class="deschttpqueryparam">ql=</em></span></tt><a class="headerlink" href="#method-post-app_id-queues-path-to-queue-cascade-true-ql-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> &#8211; application UUID or application name</li>
+<li><strong>path/to/queue</strong> &#8211; a queue path</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<li><strong>cascade</strong> &#8211; (false,1..n,all;default=1) what level of subscribers to distribute message to</li>
+<li><strong>ql</strong> &#8211; a query language statement to specify subscribers to deliver to based on queue properties</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single set of message properties:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span> <span class="o">:</span> <span class="p">{</span> <span class="s2">&quot;b&quot;</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;c&quot;</span> <span class="o">:</span> <span class="mi">2</span> <span class="p">},</span> <span class="nx">timestamp</span> <span class="o">:</span> <span class="mi">1314034739489</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Or an array of message properties in order to post multiple
+messages:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">[</span> <span class="p">{</span> <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;bar&quot;</span> <span class="p">},</span> <span class="p">{</span> <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;baz&quot;</span><span class="p">}</span> <span class="p">]</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;status&quot;</span> <span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;path/to/queue&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;queue Id&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;messages&quot;</span> <span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+          <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;a&quot;</span> <span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;b&quot;</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">&quot;c&quot;</span> <span class="o">:</span> <span class="mi">2</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+          <span class="s2">&quot;uuid&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;new_message_uuid&gt;&quot;</span>
+      <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;last&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;uuid_of_last_message&gt;&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Post a message to the specified queue path. Queues are specified by
+hierachical paths delimited by slashes. <em>Queues do not need to be defined
+before being used, simply posting to a queue path creates the queue if it
+doesn&#8217;t already exist</em>.</p>
+<p>Message contents are specified in JSON format. Any valid JSON object can be
+stored in message, regardless of level of complexity, not just name/value
+pairs.</p>
+<p>Messages by default cascade to subscribers. This is the equivalent of
+specifying cascade=1. If you want to prevent this, specify cascade=false.
+To have messages cascade to subscribers of subscribers, specify cascade=2.
+To have messages cascade down the complete subscriber tree, specify
+cascade=all.</p>
+<p>It is optional for the calling application to provide a timestamp for new
+messages as one of the values in the message properties sent in the request
+body. If a timestamp is not provided, the system will generate one. It is
+recommended that, if possible, to let the system assign timestamp values
+rather than creating them in your application as to ensure that there are
+no issues with differences between clock accuracy on the local device or
+computer and the server.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="get-messages">
+<h2>Get Messages<a class="headerlink" href="#get-messages" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-get-app_id-queues-path-to-queue-consumer-last-time-prev-next-limit-pos-update-synchronized-">
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/queues/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/queue</span>}</em></span><span class="deschttpquery">?<em class="deschttpqueryparam">consumer=</em>&amp;<em class="deschttpqueryparam">last=</em>&amp;<em class="deschttpqueryparam">time=</em>&amp;<em class="deschttpqueryparam">prev=</em>&amp;<em class="deschttpqueryparam">next=</em>&amp;<em class="deschttpqueryparam">limit=</em>&amp;<em class="deschttpqueryparam">pos=</em>&amp;<em class="deschttpqueryparam">update=</em>&amp;<em class="deschttpqueryparam">synchronized=</em></span></tt><a class="headerlink" href="#method-get-app_id-queues-path-to-queue-consumer-last-time-prev-next-limit-pos-update-synchronized-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> &#8211; application UUID or application name</li>
+<li><strong>path/to/queue</strong> &#8211; a queue path</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<li><strong>consumer</strong> &#8211; a consumer id (either a UUID returned by the service or an arbitrary string)</li>
+<li><strong>last</strong> &#8211; the last message id retrieved from the queue, return messages after this one</li>
+<li><strong>time</strong> &#8211; the timestamp to start returning messages from</li>
+<li><strong>prev</strong> &#8211; the number of previously retrieved messages to return</li>
+<li><strong>next</strong> &#8211; the number of new messages to return</li>
+<li><strong>limit</strong> &#8211; the total number of messages to return</li>
+<li><strong>pos</strong> &#8211; (start,end,last,consumer;default=consumer) where in the queue to start returning messages from</li>
+<li><strong>update</strong> &#8211; (true,false;default=true) whether to update the position after retrieving the messages</li>
+<li><strong>synchronized</strong> &#8211; (true,false;default=false) whether to ensure that requests are executed sequentially across clients</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;status&quot;</span> <span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;path/to/queue&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;queue_id&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;messages&quot;</span> <span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+          <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;a&quot;</span> <span class="o">:</span> <span class="p">{</span>
+              <span class="s2">&quot;b&quot;</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+              <span class="s2">&quot;c&quot;</span> <span class="o">:</span> <span class="mi">2</span>
+          <span class="p">},</span>
+          <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="o">&lt;</span><span class="nx">timestamp</span><span class="o">&gt;</span><span class="p">,</span>
+          <span class="s2">&quot;uuid&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;message_uuid&gt;&quot;</span>
+      <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;last&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;uuid_of_last_message&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;consumer&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;consumer_id&gt;&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Get messages from the specified queue path. The default operation is to
+return the next message after the last message that was retrieved.
+Additional messages can be specified by setting the next parameter which
+will return the specified number of new operations from the last message
+retrieved.</p>
+<p>The following example request that will return the next message in a queue
+every time it&#8217;s invoked:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">GET</span> <span class="o">/</span><span class="nx">test</span><span class="o">-</span><span class="nx">app</span><span class="o">/</span><span class="nx">queues</span><span class="o">/</span><span class="nx">my</span><span class="o">-</span><span class="nx">queue</span>
+</pre></div>
+</div>
+<p>Because no consumer is specified, every client app that makes that request
+will receive the next message with no two clients receiving the same
+message.</p>
+<p>This is an example of a request that will return the next message in a
+queue for a specific consumer. Different consumers will only see the
+messages they haven&#8217;t seen before:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">GET</span> <span class="o">/</span><span class="nx">test</span><span class="o">-</span><span class="nx">app</span><span class="o">/</span><span class="nx">queues</span><span class="o">/</span><span class="nx">my</span><span class="o">-</span><span class="nx">queue</span><span class="o">?</span><span class="nx">consumer</span><span class="o">=</span><span class="mi">9</span><span class="nx">e35aea7</span><span class="o">-</span><span class="nx">cce5</span><span class="o">-</span><span class="mi">11</span><span class="nx">e0</span><span class="o">-</span><span class="mi">9</span><span class="nx">af9</span><span class="o">-</span><span class="mi">9227</span><span class="nx">e40e3559</span>
+</pre></div>
+</div>
+<p>This example request will return a feed of the 10 most recent messages,
+suitable for a content feed or a social inbox:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">GET</span> <span class="o">/</span><span class="nx">test</span><span class="o">-</span><span class="nx">app</span><span class="o">/</span><span class="nx">queues</span><span class="o">/</span><span class="nx">my</span><span class="o">-</span><span class="nx">queue</span><span class="o">?</span><span class="nx">pos</span><span class="o">=</span><span class="nx">end</span><span class="o">&amp;</span><span class="nx">limit</span><span class="o">=</span><span class="mi">10</span>
+</pre></div>
+</div>
+<p>This example request will return up to 10 new messages and 3 old messages,
+perhaps what might be show when logging in to an instant messaging client
+similar to the way Skype does:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">GET</span> <span class="o">/</span><span class="nx">test</span><span class="o">-</span><span class="nx">app</span><span class="o">/</span><span class="nx">queues</span><span class="o">/</span><span class="nx">my</span><span class="o">-</span><span class="nx">queue</span><span class="o">?</span><span class="nx">consumer</span><span class="o">=</span><span class="mi">9</span><span class="nx">e35aea7</span><span class="o">-</span><span class="nx">cce5</span><span class="o">-</span><span class="mi">11</span><span class="nx">e0</span><span class="o">-</span><span class="mi">9</span><span class="nx">af9</span><span class="o">-</span><span class="mi">9227</span><span class="nx">e40e3559</span><span class="o">&amp;</span><span class="nx">prev</span><span class="o">=</span><span class="mi">5</span><span class="o">&amp;</span><span class="nx">next</span><span class="o">=</span><span class="mi">10</span>
+</pre></div>
+</div>
+<p>Notice the consumer ID is provided, meaning that the position in the queue
+will be specific to the consumer.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="add-subscriber">
+<h2>Add Subscriber<a class="headerlink" href="#add-subscriber" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-put-app_id-queues-path-to-publisher_queue-subscribers-path-to-subscriber_queue-">
+<tt class="descclassname deschttpmethod">PUT </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/queues/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/publisher_queue</span>}</em>/subscribers/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/subscriber_queue</span>}</em></span></tt><a class="headerlink" href="#method-put-app_id-queues-path-to-publisher_queue-subscribers-path-to-subscriber_queue-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> &#8211; application UUID or application name</li>
+<li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
+<li><strong>path/to/subscriber_queue</strong> &#8211; a queue path</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;status&quot;</span> <span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;path/to/publisher_queue&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;publisher_queue_id&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;subscribers&quot;</span> <span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+          <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;path/to/subscriber_queue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;subscriber_queue_id&quot;</span><span class="p">,</span>
+      <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;last&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;uuid_of_last_message&gt;&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Add a single subscriber to the specified queue.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="add-one-or-more-subscribers">
+<h2>Add One Or More Subscribers<a class="headerlink" href="#add-one-or-more-subscribers" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-put-app_id-queues-path-to-publisher_queue-subscribers">
+<tt class="descclassname deschttpmethod">PUT </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/queues/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/publisher_queue</span>}</em>/subscribers</span></tt><a class="headerlink" href="#method-put-app_id-queues-path-to-publisher_queue-subscribers" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> &#8211; application UUID or application name</li>
+<li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single subscriber:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;subscriber&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;path/to/subscriber_queue&gt;&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Or an array of message properties in order to post multiple
+messages:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;subscribers&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;&lt;path/to/subscriber_queue&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;path/to/subscriber_queue&gt;&quot;</span><span class="p">]</span> <span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;status&quot;</span> <span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;path/to/publisher_queue&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;publisher_queue_id&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;subscribers&quot;</span> <span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+          <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;path/to/subscriber_queue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;subscriber_queue_id&quot;</span><span class="p">,</span>
+      <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;last&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;uuid_of_last_message&gt;&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Add one or more subscribers to the specified queue.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="delete-subscriber">
+<h2>Delete Subscriber<a class="headerlink" href="#delete-subscriber" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-delete-app_id-queues-path-to-publisher_queue-subscribers-path-to-subscriber_queue-">
+<tt class="descclassname deschttpmethod">DELETE </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/queues/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/publisher_queue</span>}</em>/subscribers/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/subscriber_queue</span>}</em></span></tt><a class="headerlink" href="#method-delete-app_id-queues-path-to-publisher_queue-subscribers-path-to-subscriber_queue-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> &#8211; application UUID or application name</li>
+<li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
+<li><strong>path/to/subscriber_queue</strong> &#8211; a queue path</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;status&quot;</span> <span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;path/to/publisher_queue&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;publisher_queue_id&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;subscribers&quot;</span> <span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+          <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;path/to/subscriber_queue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;subscriber_queue_id&quot;</span><span class="p">,</span>
+      <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;last&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;uuid_of_last_message&gt;&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Remove a single subscriber to the specified queue.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="delete-one-or-more-subscribers">
+<h2>Delete One Or More Subscribers<a class="headerlink" href="#delete-one-or-more-subscribers" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-delete-app_id-queues-path-to-publisher_queue-subscribers">
+<tt class="descclassname deschttpmethod">DELETE </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/queues/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/publisher_queue</span>}</em>/subscribers</span></tt><a class="headerlink" href="#method-delete-app_id-queues-path-to-publisher_queue-subscribers" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> &#8211; application UUID or application name</li>
+<li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single subscriber:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;subscriber&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;path/to/subscriber_queue&gt;&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>Or an array of message properties in order to post multiple
+messages:</p>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;subscribers&quot;</span> <span class="o">:</span> <span class="p">[</span><span class="s2">&quot;&lt;path/to/subscriber_queue&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;path/to/subscriber_queue&gt;&quot;</span><span class="p">]</span> <span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;status&quot;</span> <span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;path/to/publisher_queue&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;publisher_queue_id&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;subscribers&quot;</span> <span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+          <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;path/to/subscriber_queue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;subscriber_queue_id&quot;</span><span class="p">,</span>
+      <span class="p">}</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;last&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;uuid_of_last_message&gt;&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Remove one or more subscribers from the specified queue.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="get-subscribers">
+<h2>Get Subscribers<a class="headerlink" href="#get-subscribers" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-get-app_id-queues-path-to-publisher_queue-subscribers-cascade-start-limit-ql-">
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/queues/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/publisher_queue</span>}</em>/subscribers</span><span class="deschttpquery">?<em class="deschttpqueryparam">cascade=</em>&amp;<em class="deschttpqueryparam">start=</em>&amp;<em class="deschttpqueryparam">limit=</em>&amp;<em class="deschttpqueryparam">ql=</em></span></tt><a class="headerlink" href="#method-get-app_id-queues-path-to-publisher_queue-subscribers-cascade-start-limit-ql-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> &#8211; application UUID or application name</li>
+<li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<li><strong>cascade</strong> &#8211; (1..n,all;default=1) what level of subscribers to return</li>
+<li><strong>start</strong> &#8211; the path of the first subscriber queue to return</li>
+<li><strong>limit</strong> &#8211; the total number of messages to return</li>
+<li><strong>ql</strong> &#8211; a query language statement to filter subscribers based on queue properties</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;status&quot;</span> <span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;path/to/publisher_queue&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;publisher_queue_id&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;subscribers&quot;</span> <span class="o">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+          <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;path/to/subscriber_queue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;subscriber_queue_id&quot;</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="p">{</span>
+          <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;path/to/subscriber_queue&quot;</span><span class="p">,</span>
+          <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;subscriber_queue_id&quot;</span><span class="p">,</span>
+      <span class="p">},</span>
+      <span class="p">...</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;last&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;uuid_of_last_message&gt;&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Get the subscribers of the specified queue. Specifying a cascade value
+allows you to retrieve downstream subscribers as well.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="get-queue-properties">
+<h2>Get Queue Properties<a class="headerlink" href="#get-queue-properties" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-get-app_id-queues-path-to-queue-properties">
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/queues/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/queue</span>}</em>/properties</span></tt><a class="headerlink" href="#method-get-app_id-queues-path-to-queue-properties" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> &#8211; application UUID or application name</li>
+<li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;path&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;path/to/queue&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;queue&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;queue_id&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;newest&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;newest_message_id&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;oldest&quot;</span> <span class="o">:</span> <span class="s2">&quot;&lt;oldest_message_id&gt;&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;created&quot;</span> <span class="o">:</span> <span class="o">&lt;</span><span class="nx">time_created</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;modified&quot;</span> <span class="o">:</span> <span class="o">&lt;</span><span class="nx">time_modified</span><span class="o">&gt;</span><span class="p">,</span>
+  <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Get the properties of the specified queue. This includes both the system
+and application defined properties.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="update-queue-properties">
+<h2>Update Queue Properties<a class="headerlink" href="#update-queue-properties" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-put-app_id-queues-path-to-queue-properties">
+<tt class="descclassname deschttpmethod">PUT </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/queues/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">path/to/queue</span>}</em>/properties</span></tt><a class="headerlink" href="#method-put-app_id-queues-path-to-queue-properties" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> &#8211; application UUID or application name</li>
+<li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
+</ul>
+</td>
+</tr>
+<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;bar&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;a&quot;</span> <span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;b&quot;</span> <span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;c&quot;</span> <span class="o">:</span> <span class="mi">2</span>
+  <span class="p">},</span>
+  <span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Stores application defined queue properties. Queue properties are indexed
+and can be used to define which of the subscribing queues that a message
+posted to a publishing queue will be distributed to. For example, you might
+store a user&#8217;s location as a property in their inbox queue and then you
+could deliver messages only to queues with a specific location.</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="gateways.html">Service Gateways &amp; Push Notifications</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="realtime.html">Realtime Delivery With Websocket</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

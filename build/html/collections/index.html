@@ -1,0 +1,139 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Entities &amp; Collections &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="next" title="Data Model" href="data_model.html" />
+    <link rel="prev" title="Authentication &amp; Authorization" href="../auth.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Entities &amp; Collections</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="../auth.html">Authentication &amp; Authorization</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="data_model.html">Data Model</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="entities-collections">
+<h1>Entities &amp; Collections<a class="headerlink" href="#entities-collections" title="Permalink to this headline">¶</a></h1>
+<p>The basic data operations in Usergrid are centered around the idea of entities
+and collections. An entity is a JSON object used by your application. Your app
+can define any types of entities it likes and we provide a set of these for
+you. Entities are organized into collections. This is roughly analogous to the
+idea of a database with rows in a table, but at a much higher-level. We make
+it very easy for you to create entities of your own and we provide a set of
+pre-built entities for common application tasks. We also make it very easy to
+find entities in the system, using built-in search technology to make every
+aspect of your data searchable. This is much simpler than using a conventional
+database for your app, and makes you immediately more productive.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="data_model.html">Data Model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#entities">Entities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#collections">Collections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="data_model.html#connections">Connections</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api_overview.html">Basic API Operations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api_overview.html#constructing-api-requests">Constructing API Requests</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_overview.html#accessing-collections">Accessing Collections</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_overview.html#queryies-and-parameters">Queryies and Parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_overview.html#alternative-to-url-encoding">Alternative to URL-encoding</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_overview.html#accessing-specific-items-in-a-collection">Accessing specific items in a Collection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_overview.html#query-parameters">Query Parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="api_overview.html#data-formats">Data Formats</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api_overview.html#request-data">Request Data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api_overview.html#response-data">Response Data</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="queries.html">Queries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="endpoints.html">API Endpoints</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#create-a-new-entity">Create A New Entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#get-an-entity-by-entity-uuid-or-name">Get An Entity By Entity UUID Or Name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#update-an-entity">Update An Entity</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#delete-an-entity-by-entity-uuid-or-name">Delete An Entity By Entity UUID Or Name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#query-a-collection">Query A Collection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#update-a-collection-by-query">Update A Collection By Query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#query-an-entity-s-collections-or-connections">Query An Entity&#8217;s Collections or Connections</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#put-an-entity-into-a-collection-or-create-a-connection">Put An Entity Into A Collection Or Create A Connection</a></li>
+<li class="toctree-l2"><a class="reference internal" href="endpoints.html#remove-an-entity-from-a-collection-or-delete-a-connection">Remove An Entity From A Collection Or Delete A Connection</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="../auth.html">Authentication &amp; Authorization</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="data_model.html">Data Model</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

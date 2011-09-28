@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>User &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="up" title="Entity Reference" href="index.html" />
+    <link rel="next" title="Group" href="group.html" />
+    <link rel="prev" title="Entity Reference" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>User</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Entity Reference</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="group.html">Group</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="user">
+<h1>User<a class="headerlink" href="#user" title="Permalink to this headline">¶</a></h1>
+<p>Users have the following properties:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="12%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Property</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>uuid</td>
+<td>UUID</td>
+<td>the user&#8217;s unique entity id</td>
+</tr>
+<tr><td>type</td>
+<td>string</td>
+<td>&#8220;user&#8221;</td>
+</tr>
+<tr><td>created</td>
+<td>long</td>
+<td>unix timestamp of entity creation</td>
+</tr>
+<tr><td>modified</td>
+<td>long</td>
+<td>unix timestamp of entity modification</td>
+</tr>
+<tr><td>username</td>
+<td>string</td>
+<td>a valid string username</td>
+</tr>
+<tr><td>email</td>
+<td>string</td>
+<td>a valid email address</td>
+</tr>
+<tr><td>password</td>
+<td>string</td>
+<td>user password (encrypted)</td>
+</tr>
+<tr><td>activated</td>
+<td>boolean</td>
+<td>whether user account has been activated</td>
+</tr>
+<tr><td>disabled</td>
+<td>boolean</td>
+<td>whether user account has been administratively disabled</td>
+</tr>
+<tr><td>firstname</td>
+<td>string</td>
+<td>user first name</td>
+</tr>
+<tr><td>middlename</td>
+<td>string</td>
+<td>user middle name</td>
+</tr>
+<tr><td>lastname</td>
+<td>string</td>
+<td>user last name</td>
+</tr>
+</tbody>
+</table>
+<p>Users have the following set properties:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="12%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Set</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>connections</td>
+<td>string</td>
+<td>set of connection types (i.e. &#8220;likes&#8221;, etc.)</td>
+</tr>
+<tr><td>rolenames</td>
+<td>string</td>
+<td>set of roles a user belongs to</td>
+</tr>
+<tr><td>permissions</td>
+<td>string</td>
+<td>set of user permissions</td>
+</tr>
+</tbody>
+</table>
+<p>Users have the following collections:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="15%" />
+<col width="12%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Collection</th>
+<th class="head">Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>groups</td>
+<td>group</td>
+<td>collection of groups a user belongs to</td>
+</tr>
+<tr><td>messages</td>
+<td>message</td>
+<td>collection of messages a user has sent</td>
+</tr>
+<tr><td>queue</td>
+<td>message</td>
+<td>collection of messages a user has received</td>
+</tr>
+<tr><td>activities</td>
+<td>activity</td>
+<td>collection of activities a user has performed</td>
+</tr>
+<tr><td>feed</td>
+<td>activity</td>
+<td>inbox of activity notifications a user has received</td>
+</tr>
+<tr><td>roles</td>
+<td>role</td>
+<td>set of roles a user belongs to</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Entity Reference</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="group.html">Group</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,145 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Delivering Messages To One Or More Consumers &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="up" title="Message Queue" href="index.html" />
+    <link rel="next" title="Content Filters &amp; Delivery Rules" href="filters.html" />
+    <link rel="prev" title="Basic Operations" href="basic_operations.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Delivering Messages To One Or More Consumers</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="basic_operations.html">Basic Operations</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="filters.html">Content Filters &amp; Delivery Rules</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="delivering-messages-to-one-or-more-consumers">
+<h1>Delivering Messages To One Or More Consumers<a class="headerlink" href="#delivering-messages-to-one-or-more-consumers" title="Permalink to this headline">¶</a></h1>
+<p>Many use cases require the ability to deliver a message to a number of
+recipients. Other message queue systems make a distinction between normal
+queues for one-to-one operations and then use a separate mechanism called a
+topic for one to many broadcasting. We allow regular queues to be used for
+one-to-many distribution through two different mechanisms:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Multiple consumers can read messages from the same queue and each
+consumers can maintain their own position in the queue as well as other
+consumer-specific metadata.</li>
+<li>Queues can subscribe to other queues so that each consumer can be given
+it&#8217;s own individual queue to read from.</li>
+</ul>
+</div></blockquote>
+<div class="section" id="multiple-consumers-reading-from-a-single-queue">
+<h2>Multiple Consumers Reading from a Single Queue<a class="headerlink" href="#multiple-consumers-reading-from-a-single-queue" title="Permalink to this headline">¶</a></h2>
+<p>When reading from a queue, you can specify the position to read from as either
+&#8220;last&#8221;, meaning to read from the last point that anyone read from the queue,
+or &#8220;consumer&#8221;, meaning the last point that the consumer read from the queue.
+In a situation where you have multiple consumer &#8220;workers&#8221; that are consuming
+events from a queue, you would use the &#8220;position=last&#8221; option when retrieving
+messages. If you were broadcasting messages where every consumer should
+receive every message, you would save your consumer ID and use it every time
+you connected, specifying the &#8220;position=consumer&#8221; (this is the default when a
+consumer ID is provided).</p>
+</div>
+<div class="section" id="queues-subscribing-to-other-queues">
+<h2>Queues Subscribing To Other Queues<a class="headerlink" href="#queues-subscribing-to-other-queues" title="Permalink to this headline">¶</a></h2>
+<p>A queue can have any number of other queues subscribe to it. When a message is
+posted to the first queue, a copy of it is placed into every subscribing
+queue. This makes it possible to create queues that aggregate messages from a
+number of source queues. This allows you to create things like inboxes or
+social functionality such as &#8220;following&#8221; where a user would have a feed
+containing all the activities of the users they follow. The user&#8217;s feed would
+be a queue that subscribed to all of the queues of the users they followed.</p>
+<div class="section" id="gateway-queues">
+<h3>Gateway Queues<a class="headerlink" href="#gateway-queues" title="Permalink to this headline">¶</a></h3>
+<p>Subscriptions are also useful for distributing messages to special gateway
+queues for relaying to other message-oriented services such as Twitter or
+Facebook, or the Apple Push Notification Service and Android Cloud to Device
+Messaging. For example, to relay messages to an iOS device, you would add the
+following queue as a subscriber to your user&#8217;s inbox queue:</p>
+<blockquote>
+<div>/apns/<em>&lt;ios_device_id&gt;</em></div></blockquote>
+<p>For Android applications, the subscriber would be:</p>
+<blockquote>
+<div>/c2dm/<em>&lt;android_registration_id&gt;</em></div></blockquote>
+<p>For relaying to Twitter, the subscriber would be:</p>
+<blockquote>
+<div>/twitter/<em>&lt;twitter_user_id&gt;</em></div></blockquote>
+<p>Gateway queues are described in more detail in the appendix and often require
+additional configuration to work correctly.</p>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="basic_operations.html">Basic Operations</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="filters.html">Content Filters &amp; Delivery Rules</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,123 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Websocket Realtime API &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="index.html" />
+    <link rel="next" title="Mongo API" href="mongo.html" />
+    <link rel="prev" title="Event" href="entities/event.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Websocket Realtime API</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="entities/event.html">Event</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="mongo.html">Mongo API</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="websocket-realtime-api">
+<h1>Websocket Realtime API<a class="headerlink" href="#websocket-realtime-api" title="Permalink to this headline">¶</a></h1>
+<p>The Websocket API allowa for asynchronous communications with the Usergrid API.</p>
+<p>OAuth credentials are put in the querystring of the initial GET request since
+the Javascript Websocket API provides no mechanism for specifying header
+contents.</p>
+<p>Once a connection is established, there are two mechanisms of usage.</p>
+<div class="section" id="async-request-response">
+<h2>Async Request/Response<a class="headerlink" href="#async-request-response" title="Permalink to this headline">¶</a></h2>
+<p>The first is to simply access the API the same way as the REST interface
+provides, except over the open websocket connection. The benefit is there is
+much less overhead than with the REST API since there is no processing of
+individual HTTP requests and authentication credentials are checked at the
+time the websocket is opened as opposed to per-request as is necessary with
+the stateless REST API.</p>
+</div>
+<div class="section" id="subscriptions">
+<h2>Subscriptions<a class="headerlink" href="#subscriptions" title="Permalink to this headline">¶</a></h2>
+<p>The second is to issue subscribe requests against entities and collections and
+be notified asynchronously as those are updated. Subscriptions against the
+activity inbox and message queue collections for either users, groups, or the
+entire application allow connected applications to get realtime updates.</p>
+<p>Connecting to an inbox or queue in the websocket url will automatically start
+a subscription to that collection. For example, the following websocket url
+will listen to a specific user&#8217;s inbox:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">ws</span><span class="o">:</span><span class="c1">//api.usergrid.com:8088/chatapp/users/edanuff/inbox</span>
+</pre></div>
+</div>
+<p>This is the real-time equivalent of making a regular REST GET request to:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/chatapp/users/edanuff/inbox</span>
+</pre></div>
+</div>
+<p>Please note that Usergrid listens to websockets on port 8088 rather than the
+standard ports 80 or 443.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="entities/event.html">Event</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="mongo.html">Mongo API</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

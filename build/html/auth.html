@@ -1,0 +1,320 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Authentication &amp; Authorization &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="index.html" />
+    <link rel="next" title="Entities &amp; Collections" href="collections/index.html" />
+    <link rel="prev" title="Getting Started With The Administration Console" href="console.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Authentication &amp; Authorization</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="console.html">Getting Started With The Administration Console</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="collections/index.html">Entities &amp; Collections</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="authentication-authorization">
+<h1>Authentication &amp; Authorization<a class="headerlink" href="#authentication-authorization" title="Permalink to this headline">¶</a></h1>
+<p>Usergrid is authenticated via oAuth 2.0. Unlike oAuth 1.0, which required
+special support in the client code for signing requests, oAuth 2.0 can be used
+by any web service client libraries. Although, at the time of this writing,
+the oAuth 2 specification is not finalized, it&#8217;s sufficiently far along that
+many web service providers, including Google and Facebook, have switched to
+using it for their authentication mechanism. You can find information about
+oAuth 2 at <a class="reference external" href="http://oauth.net/2/">Oauth.net</a>.</p>
+<p>Usergrid allows four types of access:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="13%" />
+<col width="87%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Access Type</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Organization</td>
+<td>full access to perform any operation on a Usergrid organization account</td>
+</tr>
+<tr><td>Admin User</td>
+<td>full access to perform any operation on all Usergrid organization accounts the admin user is a member of</td>
+</tr>
+<tr><td>Application</td>
+<td>full access to perform any operation on a Usergrid application</td>
+</tr>
+<tr><td>Application User</td>
+<td>policy-limited access to perform operations on a Usergrid application</td>
+</tr>
+</tbody>
+</table>
+<p>Usergrid requires that you use the standard oAuth mechanism of obtaining
+an access token and then passing that token along with your requests.  To get
+the access token, you&#8217;ll connect to the appropriate web service endpoint and provide
+the correct client credentials.</p>
+<p>Organization and Application access are meant to be used by your server-side
+applications. They are &#8220;superuser&#8221; access mechanisms and have little
+constraints on what they can do. When connecting via oAuth, you&#8217;ll use the
+client_id and client_secret parameters as your client credetials.</p>
+<p>Admin User and Application User access involved situations where you&#8217;re
+connecting as a known user account, either as an admin user who may be a
+member of several organizations and have management rights to several apps, or
+as an application user who belongs to a single app. When connecting via oAuth,
+you&#8217;ll use the username and password parameters as your client credetials.</p>
+<p>The following sections will describe the specifics of each of these levels of
+access and provide examples of getting an access token.</p>
+<div class="section" id="organizations">
+<h2>Organizations<a class="headerlink" href="#organizations" title="Permalink to this headline">¶</a></h2>
+<p>When you sign up for Usergrid, you create an Organization account in addition
+to your personal Admin User account. Organizations can be accessed with
+client_id/client_secret credentials to operate on a single Organization or by
+an Admin User who provides username/password credentials.</p>
+<p>Using your client_id and client_secret values (obtained from the Admin
+Console), you&#8217;d connect to the following URL (substituting the correct values
+for &lt;client_id&gt; and &lt;client_secret&gt;):</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/management/management/token?grant_type=client_credentials&amp;client_id=&lt;client_id&gt;&amp;client_secret=&lt;client_secret&gt;</span>
+</pre></div>
+</div>
+<p>The results would look something like this:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;access_token&quot;</span><span class="o">:</span> <span class="s2">&quot;gAuFEOlXEeCfRgBQVsAACA:b3U6AAABMqz-Cn0wtDxxkxmQLgZvTMubcP20FulCZQ&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;expires_in&quot;</span><span class="o">:</span> <span class="mi">3600</span><span class="p">,</span>
+  <span class="s2">&quot;organization&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;users&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;test&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Test User&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;disabled&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+        <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;7ff1946d-e957-11e0-9f46-005056c00008&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;activated&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s2">&quot;username&quot;</span><span class="o">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;applicationId&quot;</span><span class="o">:</span> <span class="s2">&quot;00000000-0000-0000-0000-000000000001&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;email&quot;</span><span class="o">:</span> <span class="s2">&quot;test@usergrid.com&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;adminUser&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="s2">&quot;mailTo&quot;</span><span class="o">:</span> <span class="s2">&quot;Test User &lt;test@usergrid.com&gt;&quot;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;test-organization&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;applications&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;test-app&quot;</span><span class="o">:</span> <span class="s2">&quot;8041893b-e957-11e0-9f46-005056c00008&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;800b8510-e957-11e0-9f46-005056c00008&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The above results provide the access_token value needed to make subsequent API requests
+as well as some additional information about the organization.</p>
+</div>
+<div class="section" id="admin-users">
+<h2>Admin Users<a class="headerlink" href="#admin-users" title="Permalink to this headline">¶</a></h2>
+<p>Admin Users are users of the Usergrid.com service and can be members of one or
+more Organizations. An Organization, in turn, can have one or more Admin
+Users. Currently, all Admin Users in an Organization have full access
+permissions. In the future, Admin Users will have configurable levels of
+Organization account access permissions on a per-Organization basis. Admin
+Users are authenticated with Basic credentials.</p>
+<p>Using your username and password values (specified when you created your admin
+account), you&#8217;d connect to the following URL (substituting the correct values
+for &lt;username&gt; and &lt;password&gt;):</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/management/management/token?grant_type=password&amp;username=&lt;username&gt;&amp;password=&lt;password&gt;</span>
+</pre></div>
+</div>
+<p>The results would look something like this:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;access_token&quot;</span><span class="o">:</span> <span class="s2">&quot;f_GUbelXEeCfRgBQVsAACA:YWQ6AAABMqz_xUyYeErOkKjnzN7YQXXlpgmL69fvaA&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;expires_in&quot;</span><span class="o">:</span> <span class="mi">3600</span><span class="p">,</span>
+  <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;username&quot;</span><span class="o">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="o">:</span> <span class="s2">&quot;test@usergrid.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;organizations&quot;</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">&quot;test-organization&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;users&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;test&quot;</span><span class="o">:</span> <span class="p">{</span>
+            <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Test User&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;disabled&quot;</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+            <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;7ff1946d-e957-11e0-9f46-005056c00008&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;activated&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s2">&quot;username&quot;</span><span class="o">:</span> <span class="s2">&quot;test&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;applicationId&quot;</span><span class="o">:</span> <span class="s2">&quot;00000000-0000-0000-0000-000000000001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;email&quot;</span><span class="o">:</span> <span class="s2">&quot;test@usergrid.com&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;adminUser&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s2">&quot;mailTo&quot;</span><span class="o">:</span> <span class="s2">&quot;Test User &lt;test@usergrid.com&gt;&quot;</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;test-organization&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;applications&quot;</span><span class="o">:</span> <span class="p">{</span>
+          <span class="s2">&quot;test-app&quot;</span><span class="o">:</span> <span class="s2">&quot;8041893b-e957-11e0-9f46-005056c00008&quot;</span>
+        <span class="p">},</span>
+        <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;800b8510-e957-11e0-9f46-005056c00008&quot;</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;adminUser&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">&quot;activated&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Test User&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;mailTo&quot;</span><span class="o">:</span> <span class="s2">&quot;Test User &lt;test@usergrid.com&gt;&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;applicationId&quot;</span><span class="o">:</span> <span class="s2">&quot;00000000-0000-0000-0000-000000000001&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;7ff1946d-e957-11e0-9f46-005056c00008&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;disabled&quot;</span><span class="o">:</span> <span class="kc">false</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="applications">
+<h2>Applications<a class="headerlink" href="#applications" title="Permalink to this headline">¶</a></h2>
+<p>Applications can be accessed with Application oAuth credentials, or with the
+Basic credentials of an Admin associated with the Organization that owns the
+application, or with the oAuth credentials of the Organization that owns the
+application.</p>
+<p>Using your client_id and client_secret values (obtained from the Application
+Settings section of the Admin Console), you&#8217;d connect to the following URL
+(substituting the correct values for &lt;app-name&gt;, &lt;client_id&gt; and
+&lt;client_secret&gt;):</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/&lt;app-name&gt;/token?grant_type=client_credentials&amp;client_id=&lt;client_id&gt;&amp;client_secret=&lt;client_secret&gt;</span>
+</pre></div>
+</div>
+<p>The results would look something like this:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;access_token&quot;</span><span class="o">:</span> <span class="s2">&quot;F8zeMOlcEeCUBwBQVsAACA:YXA6AAABMq0d4Mep_UgbZA0-sOJRe5yWlkq7JrDCkA&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;expires_in&quot;</span><span class="o">:</span> <span class="mi">3600</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;test-app&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;17ccde30-e95c-11e0-9407-005056c00008&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="application-users">
+<h2>Application Users<a class="headerlink" href="#application-users" title="Permalink to this headline">¶</a></h2>
+<p>Application users are the members of the &#8220;users&#8221; collection within a
+application. They are the actual users of your app and are completely separate
+from any other application or from the Usergrid.com service. They can
+authenticate with either Basic credentials or oAuth credentials. Their access
+to the system is controlled by their assigned permissions as well as the roles
+they&#8217;re members of and the permissions assigned to those roles.</p>
+<p>Using the username and password values (specified when the app user was
+created), you&#8217;d connect to the following URL (substituting the correct values
+for &lt;app-name&gt;, &lt;username&gt; and &lt;password&gt;):</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/management/&lt;app-name&gt;/token?grant_type=password&amp;username=&lt;username&gt;&amp;password=&lt;password&gt;</span>
+</pre></div>
+</div>
+<p>The results would look something like this:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;access_token&quot;</span><span class="o">:</span> <span class="s2">&quot;5wuGd-lcEeCUBwBQVsAACA:F8zeMOlcEeCUBwBQVsAACA:YXU6AAABMq0hdy4Lh0ewmmnOWOR-DaepCrpWx9oPmw&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;expires_in&quot;</span><span class="o">:</span> <span class="mi">3600</span><span class="p">,</span>
+  <span class="s2">&quot;user&quot;</span><span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;uuid&quot;</span><span class="o">:</span> <span class="s2">&quot;e70b8677-e95c-11e0-9407-005056c00008&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;type&quot;</span><span class="o">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;username&quot;</span><span class="o">:</span> <span class="s2">&quot;edanuff&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;email&quot;</span><span class="o">:</span> <span class="s2">&quot;ed@anuff.com&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;activated&quot;</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="s2">&quot;created&quot;</span><span class="o">:</span> <span class="mi">1317164604367013</span><span class="p">,</span>
+    <span class="s2">&quot;modified&quot;</span><span class="o">:</span> <span class="mi">1317164604367013</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="using-the-access-token">
+<h2>Using The Access Token<a class="headerlink" href="#using-the-access-token" title="Permalink to this headline">¶</a></h2>
+<p>Once an access token is obtained, it must be provided with every subsequent
+API call you make. It can either be added to the API querystring:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//api.usergrid.com/&lt;app-name&gt;/users?access_token=&lt;access_token&gt;</span>
+</pre></div>
+</div>
+<p>Or provided as an HTTP authorization header in the form of:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">Authorization</span><span class="o">:</span> <span class="nx">Bearer</span> <span class="o">&lt;</span><span class="nx">access_token</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Please note that this documentation assumes you are providing a valid access
+token with every API call, whether or not it explicitly mentions it. Unless
+the documentation specifically says that an API endpoint can be accessed
+without an access token, you should assume you need to provide it.</p>
+</div>
+<div class="section" id="safe-mobile-access">
+<h2>Safe Mobile Access<a class="headerlink" href="#safe-mobile-access" title="Permalink to this headline">¶</a></h2>
+<p>For mobile access, we only recommend connecting as a Application User and with
+configured access control policies. Mobile applications are inherently
+untrusted, they can be easily examined and even decompiled and any credentials
+stored in a mobile app should be considered only secure to the level of the
+app&#8217;s user. This means that if you wouldn&#8217;t want your user to be able to
+access or delete certain data in your Usergrid application, you need to make
+sure that you don&#8217;t enable that via roles or permissions. Most webapps talk to
+the database with root or some level of elevated superuser permissions and it&#8217;s
+generally a good idea for mobile apps to connect with a more restricted set of
+permissions.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="console.html">Getting Started With The Administration Console</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="collections/index.html">Entities &amp; Collections</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,155 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Basic Concepts &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="up" title="Realtime Analytics" href="index.html" />
+    <link rel="next" title="Basic Operations" href="basic_operations.html" />
+    <link rel="prev" title="Realtime Analytics" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Basic Concepts</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Realtime Analytics</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="basic_operations.html">Basic Operations</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="basic-concepts">
+<h1>Basic Concepts<a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="counters">
+<h2>Counters<a class="headerlink" href="#counters" title="Permalink to this headline">¶</a></h2>
+<p>Usergrid keeps track of key metrics for your applications in the form of
+&#8220;counters&#8221;. Counters represent a numeric value that gets incremented in
+various ways. The total number of users in your app, the number of entities in
+a collection, and the amount storage data used by your apps are all forms of
+system-defined counters that Usergrid maintains for each application it
+manages. In addition, you can define you own counters on the fly at any time.
+For example, you want to know how many times people click on the help button
+in your app, you simply start incrementing a counter named &#8220;help_button&#8221; via
+the API.</p>
+<div class="section" id="how-counters-are-used">
+<h3>How Counters Are Used<a class="headerlink" href="#how-counters-are-used" title="Permalink to this headline">¶</a></h3>
+<p>The following are examples of things will perform counter operations:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Adding an entity will increment the total number of entities in the system
+as well as the total number of entities of that type</li>
+<li>Every API operation will increment counters for the total number of bytes
+sent or received</li>
+<li>Posting an event will increment counters for the event, for the user and
+group referenced in the event, for the category and keys in the event, and
+for any name/value pairs in the event</li>
+<li>Posting a message to a queue will increment counters for the queue for any
+subscribers of that queue, for any categories and keys, and for name/value
+pairs in the message</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="time-series">
+<h2>Time Series<a class="headerlink" href="#time-series" title="Permalink to this headline">¶</a></h2>
+<p>Simply knowing the total value of a counter is not very valuable, so behind
+the scenes, Usergrid increments a set of counters so that at any time, you can
+view this data over any time interval or level of granularity. For example,
+let&#8217;s say you&#8217;re incrementing a counter every time someone launches your
+application. You might be interested in which days of the week the application
+sees the most usage. This is as simple as looking at the time series over a
+set of weeks and looking at it split into daily intervals. You&#8217;ll quickly see
+which are your peak days of usage. For some applications, it makes sense to
+view usage across the day, so you can see if it&#8217;s being used more in the
+mornings or the evenings. For business reporting, you may be more interested
+in monthly or quarterly reporting. The important thing is that Usergrid is
+able to provide you with the report data at a moments notice. All of this data
+is maintained in realtime so it can be viewed instantly.</p>
+</div>
+<div class="section" id="categorization">
+<h2>Categorization<a class="headerlink" href="#categorization" title="Permalink to this headline">¶</a></h2>
+<p>As mentioned above, several parts of the Usergrid service feed the analytics
+system. We&#8217;ll describe how these work in a more detail later. However, all the
+mechanisms that feed the analytics service also use various forms of
+categorization when they keep track of metrics data.</p>
+<p>What this means, for example, is that if we&#8217;re keeping track of events logged
+by an application, that we allow the application to provide a user id as well
+as a group id and a set of other ways of categorizing and qualifying the data.
+This means that, if you&#8217;re keeping track of how often people use a feature,
+you can not just find out the total number of users that used the feature, but
+which groups contained users that made the most use of the feature, or you
+could provide a location with the event, so you could see how often a feature
+was used by people in San Francisco versus Los Angeles.</p>
+<p>These different mechanisms of categorization can be combined with time-series
+when performing report queries, and, because of the way that Usergrid
+maintains this data, there&#8217;s no overhead when performing reports.</p>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="index.html">Realtime Analytics</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="../index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="basic_operations.html">Basic Operations</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>
