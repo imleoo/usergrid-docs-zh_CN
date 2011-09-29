@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>currentDocument</key>
-	<string>source/auth.rst</string>
+	<string>README.txt</string>
 	<key>documents</key>
 	<array>
 		<dict>
@@ -21,6 +21,20 @@
 	<integer>347</integer>
 	<key>metaData</key>
 	<dict>
+		<key>README.txt</key>
+		<dict>
+			<key>caret</key>
+			<dict>
+				<key>column</key>
+				<integer>29</integer>
+				<key>line</key>
+				<integer>4</integer>
+			</dict>
+			<key>firstVisibleColumn</key>
+			<integer>0</integer>
+			<key>firstVisibleLine</key>
+			<integer>0</integer>
+		</dict>
 		<key>source/auth.rst</key>
 		<dict>
 			<key>caret</key>
@@ -144,11 +158,12 @@
 		<string>source/index.rst</string>
 		<string>source/beta.rst</string>
 		<string>source/auth.rst</string>
+		<string>README.txt</string>
 		<string>source/intro.rst</string>
 	</array>
 	<key>showFileHierarchyDrawer</key>
 	<true/>
 	<key>windowFrame</key>
-	<string>{{0, 92}, {1322, 936}}</string>
+	<string>{{896, 312}, {1322, 746}}</string>
 </dict>
 </plist>

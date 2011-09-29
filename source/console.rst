@@ -1,14 +1,19 @@
-===============================================
-Getting Started With The Administration Console
-===============================================
+======================================
+Getting Started With The Admin Console
+======================================
 
 The Usergrid Console is the primary administrative user interface for working
 with Usergrid. The Console is also the most complete reference application for
 using Usergrid from Javascript and is fully open source and forkable on GitHub
-at https://github.com/usergrid/console. This lets you easily extend it or embed it
-into your own applications and to inspect the code to see the recommend ways
-for interacting with our API. The Usergrid Javascript client is part of the
-Console project.
+at https://github.com/usergrid/console. This lets you easily extend it or
+embed it into your own applications and to inspect the code to see the
+recommend ways for interacting with our API. The Usergrid Javascript client is
+part of the Console project.
+
+.. figure:: _static/console_home.png
+
+  :sub:`Usergrid Console on Chrome.`
+
 
 -----------------------
 Signing up for Usergrid
@@ -25,6 +30,33 @@ specify where it redirects to afterwards.
 Please note that this is only for Usergrid.com accounts. For your user
 accounts, you can completely control the registration flow and there is no
 need for it to pass through our website or URLs at all.
+
+-----------------------------------------
+Running a standalone server (Recommended)
+-----------------------------------------
+
+The easiest way to get started is by launching a personal Usergrid server
+through our launcher
+(https://usergrid.s3.amazonaws.com/usergrid-launcher-0.0.1-SNAPSHOT.jar) The
+launcher is a double-clickable Java Jar file that contains everything needed
+to run a local instance of Usergrid without performing any installation. It
+doesn't modify your system in any way other than to create some database files
+in the same directory you launch it from.
+
+Download and execute this jar by double-clicking on it.  
+
+You should be able to see this:
+
+.. figure:: _static/launcher1.png
+
+  :sub:`Usergrid launcher.`
+
+Click on the play button and once the "traffic light" becomes green, click on
+the top-right icon (The console). It will open up the Usergrid Admin console
+in your default web browser pointing to your local Usergrid server (that you
+just downloaded). The default behavior is to use the console on GitHub, but
+later on, you can download the Console html and run it locally as well if you
+want.
 
 ------------
 Account Home

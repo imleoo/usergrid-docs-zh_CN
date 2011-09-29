@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Getting Started With The Administration Console &mdash; Usergrid v1.0 documentation</title>
+    <title>Getting Started With The Admin Console &mdash; Usergrid v1.0 documentation</title>
     <link rel="stylesheet" href="_static/styles.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/print.css" type="text/css" />
@@ -32,7 +32,7 @@
   <body>
       <div class="header"><img class="rightlogo" src="_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="index.html">
           <span>Usergrid v1.0 documentation</span></a></h1>
-        <h2 class="heading"><span>Getting Started With The Administration Console</span></h2>
+        <h2 class="heading"><span>Getting Started With The Admin Console</span></h2>
       </div>
       <div class="topnav">
       
@@ -48,15 +48,19 @@
       <div class="content">
         
         
-  <div class="section" id="getting-started-with-the-administration-console">
-<h1>Getting Started With The Administration Console<a class="headerlink" href="#getting-started-with-the-administration-console" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="getting-started-with-the-admin-console">
+<h1>Getting Started With The Admin Console<a class="headerlink" href="#getting-started-with-the-admin-console" title="Permalink to this headline">¶</a></h1>
 <p>The Usergrid Console is the primary administrative user interface for working
 with Usergrid. The Console is also the most complete reference application for
 using Usergrid from Javascript and is fully open source and forkable on GitHub
-at <a class="reference external" href="https://github.com/usergrid/console">https://github.com/usergrid/console</a>. This lets you easily extend it or embed it
-into your own applications and to inspect the code to see the recommend ways
-for interacting with our API. The Usergrid Javascript client is part of the
-Console project.</p>
+at <a class="reference external" href="https://github.com/usergrid/console">https://github.com/usergrid/console</a>. This lets you easily extend it or
+embed it into your own applications and to inspect the code to see the
+recommend ways for interacting with our API. The Usergrid Javascript client is
+part of the Console project.</p>
+<div class="figure">
+<img alt="_images/console_home.png" src="_images/console_home.png" />
+<p class="caption"><sub>Usergrid Console on Chrome.</sub></p>
+</div>
 <div class="section" id="signing-up-for-usergrid">
 <h2>Signing up for Usergrid<a class="headerlink" href="#signing-up-for-usergrid" title="Permalink to this headline">¶</a></h2>
 <p>You can sign up for the Usergrid.com service via the Console. While
@@ -69,6 +73,28 @@ specify where it redirects to afterwards.</p>
 <p>Please note that this is only for Usergrid.com accounts. For your user
 accounts, you can completely control the registration flow and there is no
 need for it to pass through our website or URLs at all.</p>
+</div>
+<div class="section" id="running-a-standalone-server-recommended">
+<h2>Running a standalone server (Recommended)<a class="headerlink" href="#running-a-standalone-server-recommended" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to get started is by launching a personal Usergrid server
+through our launcher
+(<a class="reference external" href="https://usergrid.s3.amazonaws.com/usergrid-launcher-0.0.1-SNAPSHOT.jar">https://usergrid.s3.amazonaws.com/usergrid-launcher-0.0.1-SNAPSHOT.jar</a>) The
+launcher is a double-clickable Java Jar file that contains everything needed
+to run a local instance of Usergrid without performing any installation. It
+doesn&#8217;t modify your system in any way other than to create some database files
+in the same directory you launch it from.</p>
+<p>Download and execute this jar by double-clicking on it.</p>
+<p>You should be able to see this:</p>
+<div class="figure">
+<img alt="_images/launcher1.png" src="_images/launcher1.png" />
+<p class="caption"><sub>Usergrid launcher.</sub></p>
+</div>
+<p>Click on the play button and once the &#8220;traffic light&#8221; becomes green, click on
+the top-right icon (The console). It will open up the Usergrid Admin console
+in your default web browser pointing to your local Usergrid server (that you
+just downloaded). The default behavior is to use the console on GitHub, but
+later on, you can download the Console html and run it locally as well if you
+want.</p>
 </div>
 <div class="section" id="account-home">
 <h2>Account Home<a class="headerlink" href="#account-home" title="Permalink to this headline">¶</a></h2>
