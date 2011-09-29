@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Beta Notes - Read Me First (Updated 10/8/2011 5:18 PM) &mdash; Usergrid v1.0 documentation</title>
+    <title>Beta Notes - Read Me First (Updated 9/29/2011 10:40 AM) &mdash; Usergrid v1.0 documentation</title>
     <link rel="stylesheet" href="_static/styles.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="_static/print.css" type="text/css" />
@@ -32,7 +32,7 @@
   <body>
       <div class="header"><img class="rightlogo" src="_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="index.html">
           <span>Usergrid v1.0 documentation</span></a></h1>
-        <h2 class="heading"><span>Beta Notes - Read Me First (Updated 10/8/2011 5:18 PM)</span></h2>
+        <h2 class="heading"><span>Beta Notes - Read Me First (Updated 9/29/2011 10:40 AM)</span></h2>
       </div>
       <div class="topnav">
       
@@ -48,16 +48,22 @@
       <div class="content">
         
         
-  <div class="section" id="beta-notes-read-me-first-updated-10-8-2011-5-18-pm">
-<h1>Beta Notes - Read Me First (Updated 10/8/2011 5:18 PM)<a class="headerlink" href="#beta-notes-read-me-first-updated-10-8-2011-5-18-pm" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="beta-notes-read-me-first-updated-9-29-2011-10-40-am">
+<h1>Beta Notes - Read Me First (Updated 9/29/2011 10:40 AM)<a class="headerlink" href="#beta-notes-read-me-first-updated-9-29-2011-10-40-am" title="Permalink to this headline">¶</a></h1>
 <blockquote>
 <div><ul class="simple">
+<li>We&#8217;re recommending using the Usergrid Launcher
+(<a class="reference external" href="https://usergrid.s3.amazonaws.com/usergrid-launcher-0.0.1-SNAPSHOT.jar">https://usergrid.s3.amazonaws.com/usergrid-launcher-0.0.1-SNAPSHOT.jar</a>),
+to run your own local Usergrid instance during the Beta period. We&#8217;ll be
+slowly letting people into the beta of the live service but running it
+locally will let you get started right away. We&#8217;ll also be adding
+additional documentation and tools for running your own installation at
+Amazon and other hosting providers.</li>
 <li>We&#8217;re erasing the data on the beta servers fairly regular during major code
 updates.</li>
-<li>Authenticated-access to application data is currently not required during
-the early beta period in order to make testing of the API easier without
-complicating it with authentication issues. Please don&#8217;t put sensitive data
-into your apps until we turn it back on.</li>
+<li>Fine-grain permissions are not yet implemented. This will be added soon but
+in the meantime you should be aware of this and not go into production
+until this is ready.</li>
 <li>There are a lot of pieces of the Console that are still being worked on.
 Not all of these will be in the first open release and will be removed. The
 API is still be preferred mechanism for all object management.</li>

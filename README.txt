@@ -2,7 +2,7 @@ Usergrid Programmer's Guide
 
 Documentation for the Usergrid project for Application Developers
 
-Latest versions can be view online at:
+Latest versions can be viewed online at:
 
 http://usergrid.github.com/docs
 
