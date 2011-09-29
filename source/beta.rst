@@ -1,7 +1,7 @@
 
-=======================================================
-Beta Notes - Read Me First (Updated 9/29/2011 10:40 AM)
-=======================================================
+===============================================
+Beta Notes - Read Me First (9/29/2011 10:40 AM)
+===============================================
 
  - We're recommending using the Usergrid Launcher
    (https://usergrid.s3.amazonaws.com/usergrid-launcher-0.0.1-SNAPSHOT.jar),
