@@ -8,6 +8,7 @@ Contents:
    :maxdepth: 3
 
    beta
+   running_samples
    intro
    overview
    console

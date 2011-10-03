@@ -1,0 +1,186 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Running the examples &mdash; Usergrid v1.0 documentation</title>
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Usergrid v1.0 documentation" href="index.html" />
+    <link rel="next" title="Introduction" href="intro.html" />
+    <link rel="prev" title="Beta Notes - Read Me First (9/29/2011 10:40 AM)" href="beta.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Usergrid v1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Running the examples</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        «&#160;&#160;<a href="beta.html">Beta Notes - Read Me First (9/29/2011 10:40 AM)</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="intro.html">Introduction</a>&#160;&#160;»
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="running-the-examples">
+<h1>Running the examples<a class="headerlink" href="#running-the-examples" title="Permalink to this headline">¶</a></h1>
+<p>Running the examples is the best way to have a full view of the functionality
+that Usergrid provides. We will start off with <strong>Twid</strong>, a simple
+Twitter-style messages app.</p>
+<p>The next steps will guide you to download and install the standalone Usergrid
+server (through its launcher) and run the Twid app. Twid is built as a
+PhoneGap app but we&#8217;re going to show it running in a browser for simplicity.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The following steps have been tested on Safari and Chrome. Running
+in Firefox or IE will likely result in unexpected behavior.</p>
+</div>
+<div class="section" id="twid">
+<h2>Twid<a class="headerlink" href="#twid" title="Permalink to this headline">¶</a></h2>
+<p><strong>1.</strong> First, click <a class="reference external" href="https://usergrid.s3.amazonaws.com/usergrid-launcher-0.0.1-SNAPSHOT.jar">here</a> to
+download the standalone server launcher and double-click on the file once it
+has been downloaded. Click on the start button and wait for the light to turn
+green.</p>
+<p><strong>2.</strong> Open the <em>Usergrid Admin Console</em> by clicking on the top-right icon of
+the launcher app (Step 1).</p>
+<div class="figure">
+<img alt="_images/launcher_console_icon.png" src="_images/launcher_console_icon.png" />
+<p class="caption"><sub>Usergrid Console icon.</sub></p>
+</div>
+<p><strong>3.</strong> Let&#8217;s create the application. Go ahead and click on <strong>New Application</strong>
+as indicated in the next figure:</p>
+<div class="figure">
+<img alt="_images/console_create_app.png" src="_images/console_create_app.png" />
+</div>
+<p><strong>4.</strong> Enter <strong>twid</strong> as the app name.</p>
+<div class="figure">
+<img alt="_images/console_create_app2.png" src="_images/console_create_app2.png" />
+</div>
+<p><strong>5.</strong> We need to create a user that is going to be our test user to log in to
+our <em>Twid</em> app. Make sure your console has <em>Twid</em> as the active app (if it&#8217;s
+not, click on the drop-down <strong>(1)</strong> ) and click on the <em>Users</em> box (on the
+left side of the console <strong>(2)</strong> ).</p>
+<div class="figure">
+<img alt="_images/console_create_app3.png" src="_images/console_create_app3.png" />
+</div>
+<p><strong>6.</strong> Click on the <strong>New User</strong> button:</p>
+<div class="figure">
+<img alt="_images/console_create_app4.png" src="_images/console_create_app4.png" />
+</div>
+<p><strong>7.</strong> Enter the user info as indicated (enter your own password) and click on
+<strong>Create</strong> button when you are done:</p>
+<div class="figure">
+<img alt="_images/console_create_app5.png" src="_images/console_create_app5.png" />
+</div>
+<p>So far, we&#8217;ve created our app called <em>twid</em> as well as a user account
+associated with the app. We will use that user account to log into our new app
+using a mobile app that can be run in a browser.</p>
+<p><strong>8.</strong> Now you need to launch Safari or Google Chrome. In case of Google
+Chrome it should be launched this way (shut it down if it is already running):</p>
+<p><tt class="docutils literal"><span class="pre">/Applications/Google\</span> <span class="pre">Chrome.app/Contents/MacOS/Google\</span> <span class="pre">Chrome</span> <span class="pre">--allow-file-access-from-files</span></tt></p>
+<p>The special launch options are necessary because Chrome has additional
+security restrictions that will prevent the app from being able to make
+network connections.</p>
+<p><strong>9.</strong> Paste this url or just click on it:
+<a class="reference external" href="http://usergrid.github.com/samples/Twid/index.html?api_url=http://localhost:8080">http://usergrid.github.com/samples/Twid/index.html?api_url=http://localhost:8080</a></p>
+<p><strong>10.</strong> Log in to <em>Twid</em> by entering the information we used to create our
+user account in the <strong>step 7</strong> and click on the <em>Save</em> button located on the
+bottom-right area.</p>
+<div class="figure">
+<img alt="_images/twid_login.png" src="_images/twid_login.png" />
+</div>
+<p><strong>11.</strong> Let&#8217;s post a message. Click on the top-right icon in order to create a
+new message, write a message and send it.</p>
+<div class="figure">
+<img alt="_images/twid_msg1.png" src="_images/twid_msg1.png" />
+</div>
+<div class="figure">
+<img alt="_images/twid_msg2.png" src="_images/twid_msg2.png" />
+</div>
+<p><strong>Note:</strong> The message should appear in the Message Board within few
+seconds.</p>
+<p><strong>12.</strong> Now for <em>Twid</em> to act as Twitter we need to follow another user.
+Repeat the steps <strong>5, 6 &amp; 7</strong> but this time name the user <em>twid-test2</em>.</p>
+<p><strong>13.</strong> Get back to our Twid app window and add <em>twid-test</em> as a follower of
+<em>twid-test2</em> Click OK to confirm.</p>
+<div class="figure">
+<img alt="_images/twid_friend.png" src="_images/twid_friend.png" />
+</div>
+<p><strong>14.</strong> Open a tab in same browser or in another window and log in as
+<em>twid-test2</em>:
+<a class="reference external" href="http://usergrid.github.com/samples/Twid/index.html?api_url=http://localhost:8080">http://usergrid.github.com/samples/Twid/index.html?api_url=http://localhost:8080</a>
+and post a message as indicated in <strong>step 11</strong>.</p>
+<p><strong>16.</strong> Get back to the window where <em>twid-test1</em> was logged in. <em>twid-test</em>
+will see the message sent by <em>twid-test2</em>.</p>
+<div class="figure">
+<img alt="_images/twid_msg3.png" src="_images/twid_msg3.png" />
+</div>
+<p>You can now look at the source for Twid on GitHub at:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">http</span><span class="o">:</span><span class="c1">//usergrid.github.com/samples</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        «&#160;&#160;<a href="beta.html">Beta Notes - Read Me First (9/29/2011 10:40 AM)</a>
+        &#160;&#160;::&#160;&#160;
+        <a class="uplink" href="index.html">Contents</a>
+        &#160;&#160;::&#160;&#160;
+        <a href="intro.html">Introduction</a>&#160;&#160;»
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>
