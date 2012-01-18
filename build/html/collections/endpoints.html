@@ -3,14 +3,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API Endpoints &mdash; Usergrid v1.0 documentation</title>
+    <title>API Endpoints &mdash; Usergrid 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -25,14 +28,14 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="top" title="Usergrid 1.0 documentation" href="../index.html" />
     <link rel="up" title="Entities &amp; Collections" href="index.html" />
     <link rel="next" title="User Management" href="../users/index.html" />
     <link rel="prev" title="Queries" href="queries.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
-          <span>Usergrid v1.0 documentation</span></a></h1>
+          <span>Usergrid 1.0 documentation</span></a></h1>
         <h2 class="heading"><span>API Endpoints</span></h2>
       </div>
       <div class="topnav">
@@ -62,13 +65,13 @@ documentation explicitly says it&#8217;s not necessary.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single set of entity properties:</p>
+<tr class="field-even field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single set of entity properties:</p>
 </td>
 </tr>
 </tbody>
@@ -85,7 +88,7 @@ entities:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body">Example of newly created entity result:</td>
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body">Example of newly created entity result:</td>
 </tr>
 </tbody>
 </table>
@@ -145,14 +148,14 @@ than &#8220;name&#8221;. Refer to the Entity Reference for details.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 <li><strong>uuid|name</strong> (<em>uuid|string</em>) &#8211; an entity uuid or name</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of entity result:</p>
+<tr class="field-even field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of entity result:</p>
 </td>
 </tr>
 </tbody>
@@ -204,14 +207,14 @@ system-provided entity types you&#8217;re using.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 <li><strong>uuid|name</strong> (<em>uuid|string</em>) &#8211; an entity uuid or name</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single set of entity properties:</p>
+<tr class="field-even field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single set of entity properties:</p>
 </td>
 </tr>
 </tbody>
@@ -223,7 +226,7 @@ system-provided entity types you&#8217;re using.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body">Example of updated entity result:</td>
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body">Example of updated entity result:</td>
 </tr>
 </tbody>
 </table>
@@ -268,14 +271,14 @@ system-provided entity types you&#8217;re using.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 <li><strong>uuid|name</strong> (<em>uuid|string</em>) &#8211; an entity uuid or name</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of deleted entity result:</p>
+<tr class="field-even field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of deleted entity result:</p>
 </td>
 </tr>
 </tbody>
@@ -321,13 +324,13 @@ system-provided entity types you&#8217;re using.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<tr class="field-even field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
 <li><strong>ql</strong> (<em>string</em>) &#8211; a query in the query language</li>
 <li><strong>reversed</strong> (<em>string</em>) &#8211; return results in reverse order</li>
 <li><strong>start</strong> (<em>uuid</em>) &#8211; the first entity UUID to return</li>
@@ -338,7 +341,7 @@ system-provided entity types you&#8217;re using.</p>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of single entity query result:</p>
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of single entity query result:</p>
 </td>
 </tr>
 </tbody>
@@ -385,20 +388,20 @@ section for details on the options for querying or filtering.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<tr class="field-even field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
 <li><strong>ql</strong> (<em>string</em>) &#8211; a query in the query language</li>
 <li><strong>permission</strong> (<em>string</em>) &#8211; a permission type</li>
 <li><strong>filter</strong> (<em>string</em>) &#8211; a condition to filter on (multiple allowed)</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">A set of entity properties:</p>
+<tr class="field-odd field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">A set of entity properties:</p>
 </td>
 </tr>
 </tbody>
@@ -410,7 +413,7 @@ section for details on the options for querying or filtering.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body">Example result of single entity updated by query:</td>
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body">Example result of single entity updated by query:</td>
 </tr>
 </tbody>
 </table>
@@ -455,7 +458,7 @@ section for details on the options for querying or filtering.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 <li><strong>entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
@@ -463,7 +466,7 @@ section for details on the options for querying or filtering.</p>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<tr class="field-even field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
 <li><strong>ql</strong> (<em>string</em>) &#8211; a query in the query language</li>
 <li><strong>type</strong> (<em>string</em>) &#8211; the entity type to return</li>
 <li><strong>reversed</strong> (<em>string</em>) &#8211; return results in reverse order</li>
@@ -476,7 +479,7 @@ section for details on the options for querying or filtering.</p>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of single entity result:</p>
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of single entity result:</p>
 </td>
 </tr>
 </tbody>
@@ -524,7 +527,7 @@ section for details on the options for querying or filtering.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 <li><strong>first_entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
@@ -556,7 +559,7 @@ is connected to the first with a &#8220;likes&#8221; relationship:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 <li><strong>first_entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
@@ -585,7 +588,7 @@ than it&#8217;s uuid. For example:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 <li><strong>first_entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
@@ -617,7 +620,7 @@ first with a &#8220;likes&#8221; relationship:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first last simple">
 <li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
 <li><strong>collection</strong> (<em>string</em>) &#8211; a collection name</li>
 <li><strong>first_entity_id</strong> (<em>uuid|string</em>) &#8211; entity UUID or entity name</li>
@@ -656,7 +659,7 @@ than it&#8217;s uuid. For example:</p>
 
     <div class="footer">
         &copy; Copyright 2011, Usergrid.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div><script type="text/javascript">
 
   var _gaq = _gaq || [];

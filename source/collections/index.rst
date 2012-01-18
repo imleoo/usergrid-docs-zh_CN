@@ -17,6 +17,5 @@ database for your app, and makes you immediately more productive.
 .. toctree::
    data_model
    api_overview
-   queries
    endpoints
 

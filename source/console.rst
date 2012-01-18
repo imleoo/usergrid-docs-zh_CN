@@ -36,9 +36,8 @@ Running a standalone server (Recommended)
 -----------------------------------------
 
 The easiest way to get started is by launching a personal Usergrid server
-through our launcher
-(https://usergrid.s3.amazonaws.com/usergrid-launcher-0.0.1-SNAPSHOT.jar) The
-launcher is a double-clickable Java Jar file that contains everything needed
+through our `Usergrid Launcher <https://usergrid.ci.cloudbees.com/job/Usergrid%20Nightly/lastSuccessfulBuild/org.usergrid$usergrid-launcher/artifact/org.usergrid/usergrid-launcher/0.0.1-SNAPSHOT/usergrid-launcher-0.0.1-SNAPSHOT.jar>`_.
+The launcher is a double-clickable Java Jar file that contains everything needed
 to run a local instance of Usergrid without performing any installation. It
 doesn't modify your system in any way other than to create some database files
 in the same directory you launch it from.

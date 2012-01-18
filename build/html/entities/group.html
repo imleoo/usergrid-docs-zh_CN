@@ -3,14 +3,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Group &mdash; Usergrid v1.0 documentation</title>
+    <title>Group &mdash; Usergrid 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -25,14 +28,14 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="top" title="Usergrid 1.0 documentation" href="../index.html" />
     <link rel="up" title="Entity Reference" href="index.html" />
     <link rel="next" title="Role" href="role.html" />
     <link rel="prev" title="User" href="user.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
-          <span>Usergrid v1.0 documentation</span></a></h1>
+          <span>Usergrid 1.0 documentation</span></a></h1>
         <h2 class="heading"><span>Group</span></h2>
       </div>
       <div class="topnav">
@@ -59,33 +62,33 @@
 <col width="73%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Property</th>
+<tr class="row-odd"><th class="head">Property</th>
 <th class="head">Type</th>
 <th class="head">Description</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td>uuid</td>
+<tr class="row-even"><td>uuid</td>
 <td>UUID</td>
 <td>the user&#8217;s unique entity id</td>
 </tr>
-<tr><td>type</td>
+<tr class="row-odd"><td>type</td>
 <td>string</td>
 <td>&#8220;user&#8221;</td>
 </tr>
-<tr><td>created</td>
+<tr class="row-even"><td>created</td>
 <td>long</td>
 <td>unix timestamp of entity creation</td>
 </tr>
-<tr><td>modified</td>
+<tr class="row-odd"><td>modified</td>
 <td>long</td>
 <td>unix timestamp of entity modification</td>
 </tr>
-<tr><td>path</td>
+<tr class="row-even"><td>path</td>
 <td>string</td>
 <td>a valid slash-delimited group path</td>
 </tr>
-<tr><td>title</td>
+<tr class="row-odd"><td>title</td>
 <td>string</td>
 <td>a display name</td>
 </tr>
@@ -99,21 +102,21 @@
 <col width="73%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Set</th>
+<tr class="row-odd"><th class="head">Set</th>
 <th class="head">Type</th>
 <th class="head">Description</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td>connections</td>
+<tr class="row-even"><td>connections</td>
 <td>string</td>
 <td>set of connection types (i.e. &#8220;likes&#8221;, etc.)</td>
 </tr>
-<tr><td>rolenames</td>
+<tr class="row-odd"><td>rolenames</td>
 <td>string</td>
 <td>set of roles a user belongs to</td>
 </tr>
-<tr><td>permissions</td>
+<tr class="row-even"><td>permissions</td>
 <td>string</td>
 <td>set of user permissions</td>
 </tr>
@@ -127,33 +130,33 @@
 <col width="73%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Collection</th>
+<tr class="row-odd"><th class="head">Collection</th>
 <th class="head">Type</th>
 <th class="head">Description</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td>users</td>
+<tr class="row-even"><td>users</td>
 <td>user</td>
 <td>collection of users in the group</td>
 </tr>
-<tr><td>messages</td>
+<tr class="row-odd"><td>messages</td>
 <td>message</td>
 <td>collection of messages a user has sent</td>
 </tr>
-<tr><td>queue</td>
+<tr class="row-even"><td>queue</td>
 <td>message</td>
 <td>collection of messages a user has received</td>
 </tr>
-<tr><td>activities</td>
+<tr class="row-odd"><td>activities</td>
 <td>activity</td>
 <td>collection of activities a user has performed</td>
 </tr>
-<tr><td>feed</td>
+<tr class="row-even"><td>feed</td>
 <td>activity</td>
 <td>inbox of activity notifications a user has received</td>
 </tr>
-<tr><td>roles</td>
+<tr class="row-odd"><td>roles</td>
 <td>role</td>
 <td>set of roles a user belongs to</td>
 </tr>
@@ -178,7 +181,7 @@
 
     <div class="footer">
         &copy; Copyright 2011, Usergrid.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div><script type="text/javascript">
 
   var _gaq = _gaq || [];

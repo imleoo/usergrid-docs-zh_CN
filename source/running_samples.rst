@@ -18,7 +18,7 @@ Twid
 =====
 
 **1.** First, click `here
-<https://usergrid.s3.amazonaws.com/usergrid-launcher-0.0.1-SNAPSHOT.jar>`_ to
+<https://usergrid.ci.cloudbees.com/job/Usergrid%20Nightly/lastSuccessfulBuild/org.usergrid$usergrid-launcher/artifact/org.usergrid/usergrid-launcher/0.0.1-SNAPSHOT/usergrid-launcher-0.0.1-SNAPSHOT.jar>`_ to
 download the standalone server launcher and double-click on the file once it
 has been downloaded. Click on the start button and wait for the light to turn
 green.

@@ -3,14 +3,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>API Endpoints &mdash; Usergrid v1.0 documentation</title>
+    <title>API Endpoints &mdash; Usergrid 1.0 documentation</title>
+    
     <link rel="stylesheet" href="../_static/styles.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../_static/print.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
@@ -25,14 +28,14 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <script type="text/javascript" src="../_static/theme_extras.js"></script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
-    <link rel="top" title="Usergrid v1.0 documentation" href="../index.html" />
+    <link rel="top" title="Usergrid 1.0 documentation" href="../index.html" />
     <link rel="up" title="Message Queue" href="index.html" />
     <link rel="next" title="Realtime Delivery With Websocket" href="realtime.html" />
     <link rel="prev" title="Service Gateways &amp; Push Notifications" href="gateways.html" /> 
   </head>
   <body>
       <div class="header"><img class="rightlogo" src="../_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="../index.html">
-          <span>Usergrid v1.0 documentation</span></a></h1>
+          <span>Usergrid 1.0 documentation</span></a></h1>
         <h2 class="heading"><span>API Endpoints</span></h2>
       </div>
       <div class="topnav">
@@ -62,19 +65,19 @@ documentation explicitly says it&#8217;s not necessary.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> &#8211; application UUID or application name</li>
 <li><strong>path/to/queue</strong> &#8211; a queue path</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<tr class="field-even field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
 <li><strong>cascade</strong> &#8211; (false,1..n,all;default=1) what level of subscribers to distribute message to</li>
 <li><strong>ql</strong> &#8211; a query language statement to specify subscribers to deliver to based on queue properties</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single set of message properties:</p>
+<tr class="field-odd field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single set of message properties:</p>
 </td>
 </tr>
 </tbody>
@@ -91,7 +94,7 @@ messages:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
@@ -145,13 +148,13 @@ computer and the server.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> &#8211; application UUID or application name</li>
 <li><strong>path/to/queue</strong> &#8211; a queue path</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<tr class="field-even field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
 <li><strong>consumer</strong> &#8211; a consumer id (either a UUID returned by the service or an arbitrary string)</li>
 <li><strong>last</strong> &#8211; the last message id retrieved from the queue, return messages after this one</li>
 <li><strong>time</strong> &#8211; the timestamp to start returning messages from</li>
@@ -164,7 +167,7 @@ computer and the server.</p>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
@@ -232,14 +235,14 @@ will be specific to the consumer.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> &#8211; application UUID or application name</li>
 <li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
 <li><strong>path/to/subscriber_queue</strong> &#8211; a queue path</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Response Body:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
@@ -270,13 +273,13 @@ will be specific to the consumer.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> &#8211; application UUID or application name</li>
 <li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single subscriber:</p>
+<tr class="field-even field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single subscriber:</p>
 </td>
 </tr>
 </tbody>
@@ -293,7 +296,7 @@ messages:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
@@ -324,14 +327,14 @@ messages:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> &#8211; application UUID or application name</li>
 <li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
 <li><strong>path/to/subscriber_queue</strong> &#8211; a queue path</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Response Body:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
@@ -362,13 +365,13 @@ messages:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> &#8211; application UUID or application name</li>
 <li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single subscriber:</p>
+<tr class="field-even field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">Either a single subscriber:</p>
 </td>
 </tr>
 </tbody>
@@ -385,7 +388,7 @@ messages:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
@@ -416,13 +419,13 @@ messages:</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> &#8211; application UUID or application name</li>
 <li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
+<tr class="field-even field"><th class="field-name">Opt. params:</th><td class="field-body"><ul class="first simple">
 <li><strong>cascade</strong> &#8211; (1..n,all;default=1) what level of subscribers to return</li>
 <li><strong>start</strong> &#8211; the path of the first subscriber queue to return</li>
 <li><strong>limit</strong> &#8211; the total number of messages to return</li>
@@ -430,7 +433,7 @@ messages:</p>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
@@ -467,13 +470,13 @@ allows you to retrieve downstream subscribers as well.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> &#8211; application UUID or application name</li>
 <li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Response Body:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Response Body:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
@@ -503,13 +506,13 @@ and application defined properties.</p>
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
 <li><strong>app_id</strong> &#8211; application UUID or application name</li>
 <li><strong>path/to/publisher_queue</strong> &#8211; a queue path</li>
 </ul>
 </td>
 </tr>
-<tr class="field"><th class="field-name">Request Body:</th><td class="field-body"></td>
+<tr class="field-even field"><th class="field-name">Request Body:</th><td class="field-body"></td>
 </tr>
 </tbody>
 </table>
@@ -550,7 +553,7 @@ could deliver messages only to queues with a specific location.</p>
 
     <div class="footer">
         &copy; Copyright 2011, Usergrid.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div><script type="text/javascript">
 
   var _gaq = _gaq || [];
