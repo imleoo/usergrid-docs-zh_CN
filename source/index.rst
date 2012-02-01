@@ -14,6 +14,7 @@ Contents:
    console
    auth
    collections/index
+   permissions
    users/index
    messages/index
    analytics/index
