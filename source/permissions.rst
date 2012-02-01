@@ -62,9 +62,9 @@ Given the followng JSON entity::
 
     get:/users/edanuff/:/foo
 
-=============
+-------------
 API Endpoints
-=============
+-------------
 
 Please remember to include an access_token with all API calls unless the
 documentation explicitly says it's not necessary.
@@ -98,9 +98,9 @@ Get the Roles in an Application
 
    Gets the roles for the specific app.
 
--------------------
+
 Create A New Role
--------------------
+-----------------
 
 .. http:method:: POST /{app_id}/rolenames
 
@@ -136,9 +136,9 @@ Create A New Role
 
    Creates a new application role.
 
----------------------------------------
+
 Delete An Role
----------------------------------------
+--------------
 
 .. http:method:: DELETE /{app_id}/rolenames/{rolename}
 
@@ -169,7 +169,6 @@ Delete An Role
 
    Returns the new set of application roles.
 
--------------------------------------------
 Get the Permissions for an Application Role
 -------------------------------------------
 
@@ -203,7 +202,6 @@ Get the Permissions for an Application Role
 
    Gets the permissions for the specific app role.
 
--------------------------------------------
 Add a Permissions to an Application Role
 -------------------------------------------
 
@@ -244,7 +242,6 @@ Add a Permissions to an Application Role
 
    Gets the permissions for the specific app role.
 
----------------------------------------------
 Remove a Permissions from an Application Role
 ---------------------------------------------
 
