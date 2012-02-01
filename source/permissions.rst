@@ -37,8 +37,10 @@ The "${user}" in the permission means "use the current user's id for evaluating 
     /users/${user}/feed
     /users/${user}/feed/item1/a/b/c
 
-Property-level Permissions (not-yet implemented)
-------------------------------------------------
+Property-level Permissions
+--------------------------
+
+Note: This functionality is not yet implemented
 
 You can also add property-level permissions to permission rules.  These take the format of::
 
