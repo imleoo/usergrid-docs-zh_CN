@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Permissions &mdash; Usergrid 1.0 documentation</title>
+    <title>Roles &amp; Permissions &mdash; Usergrid 1.0 documentation</title>
     
     <link rel="stylesheet" href="_static/styles.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -35,7 +35,7 @@
   <body>
       <div class="header"><img class="rightlogo" src="_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="index.html">
           <span>Usergrid 1.0 documentation</span></a></h1>
-        <h2 class="heading"><span>Permissions</span></h2>
+        <h2 class="heading"><span>Roles &amp; Permissions</span></h2>
       </div>
       <div class="topnav">
       
@@ -51,15 +51,41 @@
       <div class="content">
         
         
-  <div class="section" id="permissions">
-<h1>Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h1>
-<p>Apache Shiro is used to manage the permissions - <a class="reference external" href="http://shiro.apache.org/permissions.html">http://shiro.apache.org/permissions.html</a></p>
-<p>When a request is made, Usergrid loads all the permissions for the user and all the permissions for all the roles the user is in.</p>
-<p>Our permission format extends the default Shiro model as follows:</p>
+  <div class="section" id="roles-permissions">
+<h1>Roles &amp; Permissions<a class="headerlink" href="#roles-permissions" title="Permalink to this headline">¶</a></h1>
+<p>When a request is made, and no organization-level or application-level client
+crendentials are provide, the user-level permissions are used to determine
+what operations are allowed. Usergrid loads all the permissions assigned to
+the user and all the permissions assigned to all the roles the user is in and
+checks these permissions against the resource paths you are trying to access.</p>
+<div class="section" id="roles">
+<h2>Roles<a class="headerlink" href="#roles" title="Permalink to this headline">¶</a></h2>
+<p>Every application has at least two role:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Guest - the guest role for unauthenticated users</li>
+<li>Default - the default role for authenticated users</li>
+</ul>
+</div></blockquote>
+<p>The Guest role has a basic set of permissions for being able to create a user
+or register a device. These permissions can be removed and/or new ones can be
+added.</p>
+<p>The Default role represents the set of operations you want an authenticated user
+to be able to perform.</p>
+</div>
+<div class="section" id="permissions">
+<h2>Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h2>
+<p>Our permission format is as follows:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">operations</span><span class="o">&gt;:&lt;</span><span class="nx">entity</span> <span class="nx">path</span> <span class="nx">pattern</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>&lt;operations&gt; is the comma-delimited set of allow operations (get,put,post,delete) and &lt;entity path pattern&gt; is the entity path, which is evaluated using Apache Ant pattern matching (<a class="reference external" href="http://ant.apache.org/manual/dirtasks.html#patterns">http://ant.apache.org/manual/dirtasks.html#patterns</a>).</p>
+<p>&lt;operations&gt; is the comma-delimited set of allow operations
+(get,put,post,delete) and &lt;entity path pattern&gt; is the entity path, which is
+evaluated using Apache Ant pattern matching
+(<a class="reference external" href="http://ant.apache.org/manual/dirtasks.html#patterns">http://ant.apache.org/manual/dirtasks.html#patterns</a>).</p>
+<p>Please note - when using the Console, the operations are represented in the UI
+using checkboxes. Behind the scenes, these are being turned into the
+comma-separated list of operations and prepended to the path pattern.</p>
 <p>Examples:</p>
 <ol class="arabic">
 <li><p class="first">a permission that allows anyone to create a user:</p>
@@ -74,29 +100,29 @@
 <div class="highlight-javascript"><div class="highlight"><pre><span class="nx">get</span><span class="o">:</span><span class="sr">/users/</span><span class="nx">$</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span><span class="o">/</span><span class="nx">feed</span>
 </pre></div>
 </div>
-</li>
-</ol>
 <p>The &#8220;${user}&#8221; in the permission means &#8220;use the current user&#8217;s id for evaluating this permission&#8221;</p>
-<ol class="arabic" start="4">
+</li>
 <li><p class="first">a permission allowing any linked entities to be read:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="nx">get</span><span class="o">:</span><span class="sr">/users/</span><span class="nx">$</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span><span class="o">/**</span>
-
-<span class="nx">which</span> <span class="nx">would</span> <span class="nx">match</span> <span class="nx">things</span> <span class="nx">like</span><span class="o">::</span>
-
-<span class="sr">/users/</span><span class="nx">$</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span><span class="o">/</span><span class="nx">feed</span>
+</pre></div>
+</div>
+<p>which would match things like:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="sr">/users/</span><span class="nx">$</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span><span class="o">/</span><span class="nx">feed</span>
 <span class="o">/</span><span class="nx">users</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span><span class="o">/</span><span class="nx">feed</span><span class="o">/</span><span class="nx">item1</span><span class="o">/</span><span class="nx">a</span><span class="o">/</span><span class="nx">b</span><span class="o">/</span><span class="nx">c</span>
 </pre></div>
 </div>
 </li>
 </ol>
 <div class="section" id="property-level-permissions">
-<h2>Property-level Permissions<a class="headerlink" href="#property-level-permissions" title="Permalink to this headline">¶</a></h2>
+<h3>Property-level Permissions<a class="headerlink" href="#property-level-permissions" title="Permalink to this headline">¶</a></h3>
 <p>Note: This functionality is not yet implemented</p>
-<p>You can also add property-level permissions to permission rules.  These take the format of:</p>
+<p>You can also add property-level permissions to permission rules. These take
+the format of:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">operations</span><span class="o">&gt;:&lt;</span><span class="nx">entity</span> <span class="nx">path</span> <span class="nx">patter</span><span class="o">&gt;:&lt;</span><span class="nx">property</span> <span class="nx">path</span> <span class="nx">pattern</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>&lt;property path pattern&gt; applies a path pattern using Json Pointer (<a class="reference external" href="http://tools.ietf.org/html/draft-pbryan-zyp-json-pointer-02">http://tools.ietf.org/html/draft-pbryan-zyp-json-pointer-02</a>).</p>
+<p>&lt;property path pattern&gt; applies a path pattern using Json Pointer
+(<a class="reference external" href="http://tools.ietf.org/html/draft-pbryan-zyp-json-pointer-02">http://tools.ietf.org/html/draft-pbryan-zyp-json-pointer-02</a>).</p>
 <p>Examples:</p>
 <p>Given the followng JSON entity:</p>
 <div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
@@ -106,20 +132,17 @@
 <span class="p">}</span>
 </pre></div>
 </div>
-<ol class="arabic">
-<li><p class="first">Allow reading of just the foo property:</p>
+<p>Allow reading of just the foo property:</p>
 <div class="highlight-javascript"><pre>get:/users/edanuff/:/foo</pre>
 </div>
-</li>
-</ol>
+</div>
+</div>
 <div class="section" id="api-endpoints">
-<h3>API Endpoints<a class="headerlink" href="#api-endpoints" title="Permalink to this headline">¶</a></h3>
+<h2>API Endpoints<a class="headerlink" href="#api-endpoints" title="Permalink to this headline">¶</a></h2>
 <p>Please remember to include an access_token with all API calls unless the
 documentation explicitly says it&#8217;s not necessary.</p>
-</div>
-</div>
 <div class="section" id="get-the-roles-in-an-application">
-<h2>Get the Roles in an Application<a class="headerlink" href="#get-the-roles-in-an-application" title="Permalink to this headline">¶</a></h2>
+<h3>Get the Roles in an Application<a class="headerlink" href="#get-the-roles-in-an-application" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
 <dt id="method-get-app_id-rolenames">
 <tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames</span></tt><a class="headerlink" href="#method-get-app_id-rolenames" title="Permalink to this definition">¶</a></dt>
@@ -156,7 +179,7 @@ documentation explicitly says it&#8217;s not necessary.</p>
 
 </div>
 <div class="section" id="create-a-new-role">
-<h2>Create A New Role<a class="headerlink" href="#create-a-new-role" title="Permalink to this headline">¶</a></h2>
+<h3>Create A New Role<a class="headerlink" href="#create-a-new-role" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
 <dt id="method-post-app_id-rolenames">
 <tt class="descclassname deschttpmethod">POST </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames</span></tt><a class="headerlink" href="#method-post-app_id-rolenames" title="Permalink to this definition">¶</a></dt>
@@ -205,7 +228,7 @@ documentation explicitly says it&#8217;s not necessary.</p>
 
 </div>
 <div class="section" id="delete-an-role">
-<h2>Delete An Role<a class="headerlink" href="#delete-an-role" title="Permalink to this headline">¶</a></h2>
+<h3>Delete An Role<a class="headerlink" href="#delete-an-role" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
 <dt id="method-delete-app_id-rolenames-rolename-">
 <tt class="descclassname deschttpmethod">DELETE </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">rolename</span>}</em></span></tt><a class="headerlink" href="#method-delete-app_id-rolenames-rolename-" title="Permalink to this definition">¶</a></dt>
@@ -248,7 +271,7 @@ documentation explicitly says it&#8217;s not necessary.</p>
 
 </div>
 <div class="section" id="get-the-permissions-for-an-application-role">
-<h2>Get the Permissions for an Application Role<a class="headerlink" href="#get-the-permissions-for-an-application-role" title="Permalink to this headline">¶</a></h2>
+<h3>Get the Permissions for an Application Role<a class="headerlink" href="#get-the-permissions-for-an-application-role" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
 <dt id="method-get-app_id-rolenames-rolename-">
 <tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">rolename</span>}</em></span></tt><a class="headerlink" href="#method-get-app_id-rolenames-rolename-" title="Permalink to this definition">¶</a></dt>
@@ -293,7 +316,7 @@ documentation explicitly says it&#8217;s not necessary.</p>
 
 </div>
 <div class="section" id="add-a-permissions-to-an-application-role">
-<h2>Add a Permissions to an Application Role<a class="headerlink" href="#add-a-permissions-to-an-application-role" title="Permalink to this headline">¶</a></h2>
+<h3>Add a Permissions to an Application Role<a class="headerlink" href="#add-a-permissions-to-an-application-role" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
 <dt id="method-post-app_id-rolenames-rolename-">
 <tt class="descclassname deschttpmethod">POST </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">rolename</span>}</em></span></tt><a class="headerlink" href="#method-post-app_id-rolenames-rolename-" title="Permalink to this definition">¶</a></dt>
@@ -349,7 +372,7 @@ documentation explicitly says it&#8217;s not necessary.</p>
 
 </div>
 <div class="section" id="remove-a-permissions-from-an-application-role">
-<h2>Remove a Permissions from an Application Role<a class="headerlink" href="#remove-a-permissions-from-an-application-role" title="Permalink to this headline">¶</a></h2>
+<h3>Remove a Permissions from an Application Role<a class="headerlink" href="#remove-a-permissions-from-an-application-role" title="Permalink to this headline">¶</a></h3>
 <dl class="method">
 <dt id="method-delete-app_id-rolenames-rolename-permission-permission-">
 <tt class="descclassname deschttpmethod">DELETE </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">rolename</span>}</em></span><span class="deschttpquery">?<em class="deschttpqueryparam">permission={permission}</em></span></tt><a class="headerlink" href="#method-delete-app_id-rolenames-rolename-permission-permission-" title="Permalink to this definition">¶</a></dt>
@@ -392,6 +415,7 @@ documentation explicitly says it&#8217;s not necessary.</p>
 <p>Removes the permissions for the specific app role.</p>
 </dd></dl>
 
+</div>
 </div>
 </div>
 

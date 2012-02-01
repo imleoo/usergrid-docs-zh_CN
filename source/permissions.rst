@@ -1,16 +1,45 @@
-===========
+===================
+Roles & Permissions
+===================
+
+When a request is made, and no organization-level or application-level client
+crendentials are provide, the user-level permissions are used to determine
+what operations are allowed. Usergrid loads all the permissions assigned to
+the user and all the permissions assigned to all the roles the user is in and
+checks these permissions against the resource paths you are trying to access.
+
+-----
+Roles
+-----
+
+Every application has at least two role:
+
+ - Guest - the guest role for unauthenticated users
+ - Default - the default role for authenticated users
+
+The Guest role has a basic set of permissions for being able to create a user
+or register a device. These permissions can be removed and/or new ones can be
+added.
+
+The Default role represents the set of operations you want an authenticated user
+to be able to perform.
+
+-----------
 Permissions
-===========
+-----------
 
-Apache Shiro is used to manage the permissions - http://shiro.apache.org/permissions.html
-
-When a request is made, Usergrid loads all the permissions for the user and all the permissions for all the roles the user is in.
-
-Our permission format extends the default Shiro model as follows::
+Our permission format is as follows::
 
   <operations>:<entity path pattern>
 
-<operations> is the comma-delimited set of allow operations (get,put,post,delete) and <entity path pattern> is the entity path, which is evaluated using Apache Ant pattern matching (http://ant.apache.org/manual/dirtasks.html#patterns).
+<operations> is the comma-delimited set of allow operations
+(get,put,post,delete) and <entity path pattern> is the entity path, which is
+evaluated using Apache Ant pattern matching
+(http://ant.apache.org/manual/dirtasks.html#patterns).
+
+Please note - when using the Console, the operations are represented in the UI
+using checkboxes. Behind the scenes, these are being turned into the
+comma-separated list of operations and prepended to the path pattern.
 
 Examples:
 
@@ -26,13 +55,13 @@ Examples:
 
     get:/users/${user}/feed
 
-The "${user}" in the permission means "use the current user's id for evaluating this permission"
+   The "${user}" in the permission means "use the current user's id for evaluating this permission"
 
 4) a permission allowing any linked entities to be read::
 
     get:/users/${user}/**
 
-    which would match things like::
+   which would match things like::
 
     /users/${user}/feed
     /users/${user}/feed/item1/a/b/c
@@ -42,11 +71,13 @@ Property-level Permissions
 
 Note: This functionality is not yet implemented
 
-You can also add property-level permissions to permission rules.  These take the format of::
+You can also add property-level permissions to permission rules. These take
+the format of::
 
   <operations>:<entity path patter>:<property path pattern>
 
-<property path pattern> applies a path pattern using Json Pointer (http://tools.ietf.org/html/draft-pbryan-zyp-json-pointer-02).
+<property path pattern> applies a path pattern using Json Pointer
+(http://tools.ietf.org/html/draft-pbryan-zyp-json-pointer-02).
 
 Examples:
 
@@ -58,7 +89,7 @@ Given the followng JSON entity::
     "foo" : "bar"
   }
 
-1) Allow reading of just the foo property::
+Allow reading of just the foo property::
 
     get:/users/edanuff/:/foo
 
