@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Permissions &mdash; Usergrid 1.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/styles.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/print.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/theme_extras.js"></script>
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+    <link rel="top" title="Usergrid 1.0 documentation" href="index.html" /> 
+  </head>
+  <body>
+      <div class="header"><img class="rightlogo" src="_static/usergrid_400.png" alt="Logo"/><h1 class="heading"><a href="index.html">
+          <span>Usergrid 1.0 documentation</span></a></h1>
+        <h2 class="heading"><span>Permissions</span></h2>
+      </div>
+      <div class="topnav">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+      <div class="content">
+        
+        
+  <div class="section" id="permissions">
+<h1>Permissions<a class="headerlink" href="#permissions" title="Permalink to this headline">¶</a></h1>
+<p>Apache Shiro is used to manage the permissions - <a class="reference external" href="http://shiro.apache.org/permissions.html">http://shiro.apache.org/permissions.html</a></p>
+<p>When a request is made, Usergrid loads all the permissions for the user and all the permissions for all the roles the user is in.</p>
+<p>Our permission format extends the default Shiro model as follows:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">operations</span><span class="o">&gt;:&lt;</span><span class="nx">entity</span> <span class="nx">path</span> <span class="nx">pattern</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>&lt;operations&gt; is the comma-delimited set of allow operations (get,put,post,delete) and &lt;entity path pattern&gt; is the entity path, which is evaluated using Apache Ant pattern matching (<a class="reference external" href="http://ant.apache.org/manual/dirtasks.html#patterns">http://ant.apache.org/manual/dirtasks.html#patterns</a>).</p>
+<p>Examples:</p>
+<ol class="arabic">
+<li><p class="first">a permission that allows anyone to create a user:</p>
+<div class="highlight-javascript"><pre>post:/users</pre>
+</div>
+</li>
+<li><p class="first">a permission that allows someone to look at a specific user:</p>
+<div class="highlight-javascript"><pre>get:/users/edanuff</pre>
+</div>
+</li>
+<li><p class="first">a permission that allows the current user to see their activity feed:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">get</span><span class="o">:</span><span class="sr">/users/</span><span class="nx">$</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span><span class="o">/</span><span class="nx">feed</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>The &#8220;${user}&#8221; in the permission means &#8220;use the current user&#8217;s id for evaluating this permission&#8221;</p>
+<ol class="arabic" start="4">
+<li><p class="first">a permission allowing any linked entities to be read:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="nx">get</span><span class="o">:</span><span class="sr">/users/</span><span class="nx">$</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span><span class="o">/**</span>
+
+<span class="nx">which</span> <span class="nx">would</span> <span class="nx">match</span> <span class="nx">things</span> <span class="nx">like</span><span class="o">::</span>
+
+<span class="sr">/users/</span><span class="nx">$</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span><span class="o">/</span><span class="nx">feed</span>
+<span class="o">/</span><span class="nx">users</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">user</span><span class="p">}</span><span class="o">/</span><span class="nx">feed</span><span class="o">/</span><span class="nx">item1</span><span class="o">/</span><span class="nx">a</span><span class="o">/</span><span class="nx">b</span><span class="o">/</span><span class="nx">c</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<div class="section" id="property-level-permissions-not-yet-implemented">
+<h2>Property-level Permissions (not-yet implemented)<a class="headerlink" href="#property-level-permissions-not-yet-implemented" title="Permalink to this headline">¶</a></h2>
+<p>You can also add property-level permissions to permission rules.  These take the format of:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="o">&lt;</span><span class="nx">operations</span><span class="o">&gt;:&lt;</span><span class="nx">entity</span> <span class="nx">path</span> <span class="nx">patter</span><span class="o">&gt;:&lt;</span><span class="nx">property</span> <span class="nx">path</span> <span class="nx">pattern</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>&lt;property path pattern&gt; applies a path pattern using Json Pointer (<a class="reference external" href="http://tools.ietf.org/html/draft-pbryan-zyp-json-pointer-02">http://tools.ietf.org/html/draft-pbryan-zyp-json-pointer-02</a>).</p>
+<p>Examples:</p>
+<p>Given the followng JSON entity:</p>
+<div class="highlight-javascript"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;type&quot;</span> <span class="o">:</span> <span class="s2">&quot;user&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;username&quot;</span> <span class="o">:</span> <span class="s2">&quot;edanuff&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;foo&quot;</span> <span class="o">:</span> <span class="s2">&quot;bar&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p class="first">Allow reading of just the foo property:</p>
+<div class="highlight-javascript"><pre>get:/users/edanuff/:/foo</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="api-endpoints">
+<h1>API Endpoints<a class="headerlink" href="#api-endpoints" title="Permalink to this headline">¶</a></h1>
+<p>Please remember to include an access_token with all API calls unless the
+documentation explicitly says it&#8217;s not necessary.</p>
+<div class="section" id="get-the-roles-in-an-application">
+<h2>Get the Roles in an Application<a class="headerlink" href="#get-the-roles-in-an-application" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="method-get-app_id-rolenames">
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames</span></tt><a class="headerlink" href="#method-get-app_id-rolenames" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Response Body:</th><td class="field-body">Example of entity result:</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span> <span class="o">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span> <span class="o">:</span> <span class="s2">&quot;7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;_&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;1328058070002&quot;</span> <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;uri&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="p">],</span>
+  <span class="s2">&quot;data&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;admin&quot;</span> <span class="o">:</span> <span class="s2">&quot;Administrator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;default&quot;</span> <span class="o">:</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;guest&quot;</span> <span class="o">:</span> <span class="s2">&quot;Guest&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1328058069799</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span> <span class="o">:</span> <span class="mi">46</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Gets the roles for the specific app.</p>
+</dd></dl>
+
+<div class="section" id="create-a-new-role">
+<h3>Create A New Role<a class="headerlink" href="#create-a-new-role" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="method-post-app_id-rolenames">
+<tt class="descclassname deschttpmethod">POST </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames</span></tt><a class="headerlink" href="#method-post-app_id-rolenames" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Request Body:</th><td class="field-body">A JSON object with a rolename and title:</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;name&quot;</span> <span class="o">:</span> <span class="s2">&quot;manager&quot;</span><span class="p">,</span> <span class="s2">&quot;title&quot;</span> <span class="o">:</span> <span class="s2">&quot;Manager&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body">Example of newly created role result:</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span> <span class="o">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span> <span class="o">:</span> <span class="s2">&quot;7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;_&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;1328058070002&quot;</span> <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;uri&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="p">],</span>
+  <span class="s2">&quot;data&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;admin&quot;</span> <span class="o">:</span> <span class="s2">&quot;Administrator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;default&quot;</span> <span class="o">:</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;manager&quot;</span> <span class="o">:</span> <span class="s2">&quot;Manager&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;guest&quot;</span> <span class="o">:</span> <span class="s2">&quot;Guest&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1328058069799</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span> <span class="o">:</span> <span class="mi">46</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Creates a new application role.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="delete-an-role">
+<h3>Delete An Role<a class="headerlink" href="#delete-an-role" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="method-get-app_id-rolenames-rolename-">
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">rolename</span>}</em></span></tt><a class="headerlink" href="#method-get-app_id-rolenames-rolename-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>rolename</strong> (<em>string</em>) &#8211; a role name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of deleted entity result:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span> <span class="o">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span> <span class="o">:</span> <span class="s2">&quot;7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;_&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;1328058070002&quot;</span> <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;uri&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="p">],</span>
+  <span class="s2">&quot;data&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;admin&quot;</span> <span class="o">:</span> <span class="s2">&quot;Administrator&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;default&quot;</span> <span class="o">:</span> <span class="s2">&quot;Default&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;guest&quot;</span> <span class="o">:</span> <span class="s2">&quot;Guest&quot;</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1328058069799</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span> <span class="o">:</span> <span class="mi">46</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Deletes the role with the specified rolename.</p>
+<p>Returns the new set of application roles.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="get-the-permissions-for-an-application-role">
+<h3>Get the Permissions for an Application Role<a class="headerlink" href="#get-the-permissions-for-an-application-role" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt>
+<tt class="descclassname deschttpmethod">GET </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">rolename</span>}</em></span></tt></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>rolename</strong> (<em>string</em>) &#8211; a role name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of entity result:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span> <span class="o">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span> <span class="o">:</span> <span class="s2">&quot;7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;_&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;1328058543902&quot;</span> <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;uri&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="p">],</span>
+  <span class="s2">&quot;data&quot;</span> <span class="o">:</span> <span class="p">[</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/activities&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/feed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/following/*&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/following/user/*&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/groups&quot;</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1328058543530</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span> <span class="o">:</span> <span class="mi">33</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Gets the permissions for the specific app role.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="add-a-permissions-to-an-application-role">
+<h3>Add a Permissions to an Application Role<a class="headerlink" href="#add-a-permissions-to-an-application-role" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="method-post-app_id-rolenames-rolename-">
+<tt class="descclassname deschttpmethod">POST </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">rolename</span>}</em></span></tt><a class="headerlink" href="#method-post-app_id-rolenames-rolename-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>rolename</strong> (<em>string</em>) &#8211; a role name</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Request Body:</th><td class="field-body"><p class="first last">A JSON object with a rolename and title:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span> <span class="s2">&quot;permission&quot;</span> <span class="o">:</span> <span class="s2">&quot;get,put,post,delete:/users/${user}/groups&quot;</span> <span class="p">}</span>
+</pre></div>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Response Body:</th><td class="field-body">Example of entity result:</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span> <span class="o">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span> <span class="o">:</span> <span class="s2">&quot;7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;_&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;1328058543902&quot;</span> <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;uri&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="p">],</span>
+  <span class="s2">&quot;data&quot;</span> <span class="o">:</span> <span class="p">[</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/activities&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/feed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/following/*&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/following/user/*&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/groups&quot;</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1328058543530</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span> <span class="o">:</span> <span class="mi">33</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Gets the permissions for the specific app role.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="remove-a-permissions-from-an-application-role">
+<h3>Remove a Permissions from an Application Role<a class="headerlink" href="#remove-a-permissions-from-an-application-role" title="Permalink to this headline">¶</a></h3>
+<dl class="method">
+<dt id="method-delete-app_id-rolenames-rolename-permission-permission-">
+<tt class="descclassname deschttpmethod">DELETE </tt><tt class="descname deschttpurl"><span class="deschttppath">/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">app_id</span>}</em>/rolenames/<em class="deschttppatharg">{<span class="deschttppatharg deschttppatharg">rolename</span>}</em></span><span class="deschttpquery">?<em class="deschttpqueryparam">permission={permission}</em></span></tt><a class="headerlink" href="#method-delete-app_id-rolenames-rolename-permission-permission-" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Path arguments:</th><td class="field-body"><ul class="first simple">
+<li><strong>app_id</strong> (<em>uuid|string</em>) &#8211; application UUID or application name</li>
+<li><strong>rolename</strong> (<em>string</em>) &#8211; a role name</li>
+<li><strong>permission</strong> (<em>string</em>) &#8211; a permission</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Response Body:</th><td class="field-body"><p class="first last">Example of entity result:</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-js"><div class="highlight"><pre><span class="p">{</span>
+  <span class="s2">&quot;action&quot;</span> <span class="o">:</span> <span class="s2">&quot;get&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;application&quot;</span> <span class="o">:</span> <span class="s2">&quot;7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;params&quot;</span> <span class="o">:</span> <span class="p">{</span>
+    <span class="s2">&quot;_&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="s2">&quot;1328058543902&quot;</span> <span class="p">]</span>
+  <span class="p">},</span>
+  <span class="s2">&quot;uri&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://api.usergrid.com/7fb8d891-477d-11e1-b2bd-22000a1c4e22&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;entities&quot;</span> <span class="o">:</span> <span class="p">[</span> <span class="p">],</span>
+  <span class="s2">&quot;data&quot;</span> <span class="o">:</span> <span class="p">[</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/activities&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/feed&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/following/*&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;get,put,post,delete:/users/${user}/following/user/*&quot;</span><span class="p">,</span>
+  <span class="p">],</span>
+  <span class="s2">&quot;timestamp&quot;</span> <span class="o">:</span> <span class="mi">1328058543530</span><span class="p">,</span>
+  <span class="s2">&quot;duration&quot;</span> <span class="o">:</span> <span class="mi">33</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Removes the permissions for the specific app role.</p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+      </div>
+      <div class="bottomnav">
+      
+        <p>
+        <a class="uplink" href="index.html">Contents</a>
+        </p>
+
+      </div>
+
+
+    <div class="footer">
+        &copy; Copyright 2011, Usergrid.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
+    </div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25938707-2']);
+  _gaq.push(['_setDomainName', 'none']);
+  _gaq.push(['_setAllowLinker', true]);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
+  </body>
+</html>
