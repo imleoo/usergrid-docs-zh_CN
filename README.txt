@@ -13,7 +13,7 @@ and has some specific features for documenting Python code, it's a general
 purpose documentation generation system which is becoming increasingly popular
 for generating this type of user documentation.
 
-Sphinx uses reStructuredText (http://docutils.sourceforge.net/rst.html), which
+Sphinx uses reStructuredText d(http://docutils.sourceforge.net/rst.html), which
 is a plaintext markup language like Markdown or Textile.  Sphinx takes the rST
 source documentation and generates an actual site with a table of contents
 and navigation, using Jinja (http://jinja.pocoo.org/), which is a template
